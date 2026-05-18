@@ -12,6 +12,7 @@ specific P0 finding from the audit.
 | `pages/contact.md`                                | 5.1           | Online Store → Pages → Add page → handle `contact` → paste body                                                |
 | `pages/affiliate-disclosure.md`                   | 5.1, 5.2      | Online Store → Pages → Add page → handle `affiliate-disclosure` → paste body, then add footer link             |
 | `pages/editorial-methodology.md`                  | 5.3           | Online Store → Pages → Add page → handle `editorial-methodology` → paste body                                  |
+| `blog/what-do-n-r-p-mean-on-a-respirator.md`      | 7, 5.2, 5.3   | Online Store → Blog posts → Add blog post → Blog: *Guides* → handle `what-do-n-r-p-mean-on-a-respirator` → paste body |
 
 ## What still needs to be done outside this repo
 
@@ -41,8 +42,12 @@ These were called out in the audit but cannot be solved with files alone:
 
 ## Placeholders to fill in before publishing
 
-Every `[BRACKETED]` value in the `pages/*.md` files is a fact only
-the operator can supply (real names, credentials, email addresses,
-mailing address, founding year, affiliate networks enrolled in,
-testing hours, etc.). Anything left as a placeholder will misrepresent
-the business — search-and-replace each one before publishing.
+Every `[BRACKETED]` value in the `pages/*.md` and `blog/*.md` files is
+a fact only the operator can supply (real names, credentials, email
+addresses, mailing address, founding year, affiliate networks enrolled
+in, testing hours, post author and reviewer, last-updated date, etc.).
+Anything left as a placeholder will misrepresent the business —
+search-and-replace each one before publishing. For
+`blog/what-do-n-r-p-mean-on-a-respirator.md`, also confirm all 15
+internal links resolve on the live site (the "Internal links used"
+checklist at the bottom of that file lists them).
