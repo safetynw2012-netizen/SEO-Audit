@@ -1,0 +1,39 @@
+{% comment %}
+  Reusable FTC-compliant affiliate-disclosure box.
+
+  Where this goes in Shopify:
+    Online Store → Themes → ... → Edit code → Snippets → Add a new
+    snippet → name it "affiliate-disclosure" → paste this file.
+
+  How to use it:
+    Insert this line at the very top of every buying-guide article
+    body (above the first product mention), and at the top of every
+    /products/ template that promotes affiliate purchases:
+
+      {% render 'affiliate-disclosure' %}
+
+    For the Shopify blog editor (rich text), wrap the snippet in a
+    Liquid include via a custom blog template, or paste the rendered
+    HTML directly into the article body. See pages/affiliate-disclosure.md
+    for the full standalone page.
+
+  Why:
+    FTC 16 CFR Part 255 requires that material connections (paid
+    commissions for product recommendations) be disclosed clearly
+    and conspicuously, near the relevant claim, before the consumer
+    sees the link. A footer-only disclosure is not compliant.
+{% endcomment %}
+<aside class="affiliate-disclosure"
+       role="note"
+       aria-label="Affiliate disclosure"
+       style="border:1px solid #d0d7de;background:#f6f8fa;padding:12px 16px;margin:0 0 24px;border-radius:6px;font-size:0.95em;line-height:1.45;">
+  <strong>Affiliate disclosure:</strong>
+  WC Safety is reader-supported. When you buy through links on this
+  page we may earn a commission from the retailer, at no extra cost
+  to you. We only recommend products we believe meet the safety
+  standards described in our
+  <a href="/pages/editorial-methodology">editorial methodology</a>.
+  See our full
+  <a href="/pages/affiliate-disclosure">affiliate disclosure</a>
+  for details.
+</aside>
