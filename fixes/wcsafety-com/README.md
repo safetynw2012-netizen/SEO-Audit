@@ -12,6 +12,7 @@ specific P0 finding from the audit.
 | `pages/contact.md`                                | 5.1           | Online Store → Pages → Add page → handle `contact` → paste body                                                |
 | `pages/affiliate-disclosure.md`                   | 5.1, 5.2      | Online Store → Pages → Add page → handle `affiliate-disclosure` → paste body, then add footer link             |
 | `pages/editorial-methodology.md`                  | 5.3           | Online Store → Pages → Add page → handle `editorial-methodology` → paste body                                  |
+| `redirects-product-reviews.csv`                   | reviews 2026-05-22 | Online Store → Navigation → URL Redirects → Import → upload CSV (operationalizes the REMOVE verdicts in `audits/wcsafety-com-product-reviews-2026-05-22.md`) |
 
 ## What still needs to be done outside this repo
 
