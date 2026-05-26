@@ -15,7 +15,8 @@
    ┌──────────────────────────────────────────────────────┐
    │   OVERALL SEO SCORE:  70 / 100   →  GRADE C-           │
    │   (realized — verifiable categories only, see §0)      │
-   │   Updated 2026-05-26: trust pages now indexed (+5)      │
+   │   Full regrade 2026-05-26: trust pages indexed (+5);    │
+   │   on-page + crawl issues unchanged → score holds at 70  │
    │   Potential with on-page + crawl fixes:  ~83  →  B     │
    └──────────────────────────────────────────────────────┘
 ```
@@ -147,9 +148,12 @@ to the other. (See audit §3, §4.1.)
   - `- WC Safety` (ASCII hyphen): *Master Collection*, *Tools*,
     *Fire Extinguishers*
   - `| WC Safety` (pipe): several reviews/products
-  - `— America's Safety Gear Experts` (wrong brand entirely):
-    `/collections/3m-6500-series-half-mask-respirators` **and** the
-    product `brk-first-alert-9120bff-…`
+  - `— America's Safety Gear Experts` (wrong brand entirely — now confirmed
+    on **≥3 pages** in the 2026-05-26 re-sweep):
+    `/collections/3m-6500-series-half-mask-respirators`,
+    `/collections/3m-respirator-cartridges-and-filters`, and the product
+    `/products/3m-1100-foam-ear-plugs-cordless-nrr-29` (plus the earlier
+    `brk-first-alert-9120bff-…`)
   - no suffix at all on some product/listing snippets
   
   This is the single biggest on-page drag and signals SEO metafields still
@@ -192,15 +196,17 @@ over-length titles to ~55–60 chars, and 301 the long BearKat slug.
   section) **is now indexed**, so the "who/how" credibility is starting to
   be credited. `[CONFIRMED — operator]`
 - A dedicated **`/pages/wc-safety-editorial-team`** page is now live and
-  indexed — directly addressing the prior "no named reviewer" gap. Its
-  E-E-A-T value depends on whether it names **real, verifiable people with
-  credentials** vs. restating the "WC Safety editorial byline." Content not
-  yet graded here. `[CONFIRMED indexed; content VERIFY]`
+  indexed. However, the 2026-05-26 re-sweep shows it presents the team
+  **collectively** ("independent safety specialists / WC Safety Editorial
+  Team") with **no named individuals or personal credentials surfacing** —
+  so it partly addresses the "no named reviewer" gap (a staffed team page
+  beats a lone byline) but does not yet close it. `[CONFIRMED indexed]`
 
 **What's still keeping it from a B**
-- If the editorial-team page is still pseudonymous (no real names), the
-  author-identity gap persists — the single biggest remaining E-E-A-T
-  limiter for a YMYL safety site.
+- **Author identity is still collective/pseudonymous.** No real, verifiable
+  person with credentials is attached to the reviews — the single biggest
+  remaining E-E-A-T limiter for a YMYL safety site. Naming ≥1 real reviewer
+  with a bio would push this category to ~85 (B).
 - The duplicate 3M 6002 review (see §2.1) splits authority for the site's
   best E-E-A-T asset across two URLs.
 
