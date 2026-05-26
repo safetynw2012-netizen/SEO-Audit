@@ -13,25 +13,28 @@
 
 ```
    ┌──────────────────────────────────────────────────────┐
-   │   OVERALL SEO SCORE:  74 / 100   →  GRADE C            │
+   │   OVERALL SEO SCORE:  78 / 100   →  GRADE C+           │
    │   (realized — verifiable categories only, see §0)      │
-   │   2026-05-26: trust pages indexed (+5); rogue-brand     │
-   │   title cleared on live site (+4) → 70 → 74             │
-   │   Potential with crawl + slug/title polish:  ~83 → B   │
+   │   2026-05-26 session: trust pages indexed (+5);         │
+   │   rogue-brand title cleared (+4); crawl-hygiene         │
+   │   fixes 1–4 in place (+4) → 65 → 78. ~2 pts from B.     │
+   │   Potential once re-crawled + polished:  ~85  →  B     │
    └──────────────────────────────────────────────────────┘
 ```
 
-A small Shopify safety/PPE store that has **moved fast in the right
-direction**: a scored product-review section and growing buying-guide
-library, a genuinely strong set of trust pages (About / Contact / Affiliate
-Disclosure, all now indexed as of 2026-05-26), and — confirmed by the
-operator 2026-05-26 — the rogue "America's Safety Gear Experts" brand suffix
-**cleared from the live page titles** (Google's listings will catch up on
-re-crawl). Those two wins lifted the site from **D (65) → C (74)** in this
-session. The remaining ceiling is now mostly crawl hygiene: duplicate/faceted
-URLs from the 2026-05-15 audit are still indexed (§2.1), plus a few on-page
-polish items (one 190-char slug, some over-length titles). Clearing those
-moves the site toward a low **B (~83)**.
+A small Shopify safety/PPE store that has **moved fast and well** this
+session. In a single working session the operator: got the trust pages
+(About / Contact / Affiliate Disclosure) indexed, cleared the rogue
+"America's Safety Gear Experts" brand from live page titles, and put the
+four dominant crawl-hygiene fixes in place (faceted-URL canonical + robots
+disallow, `/collections/all` and Master Collection `noindex`, and a 301 on
+the duplicate 3M 6002 review). Those wins moved the site from **D (65) →
+C+ (78)** — about two points shy of a **B**. Caveat: the crawl fixes and
+title change are confirmed in place but their search-index benefit lands on
+Google's **re-crawl**, so the live index will lag. The remaining gap to B
+is now small: rationalize a cluster of overlapping collections (§2.1) and
+finish the on-page polish (301 the one 190-char slug, trim a couple of
+over-length titles, §2.2).
 
 ---
 
@@ -79,18 +82,19 @@ deduced from URL/platform patterns; `[VERIFY]` = needs on-site checking.
 
 | # | Category                    | Weight | Realized | Grade | Potential | Trend vs. 05-15 |
 | - | --------------------------- | -----: | -------: | :---: | :-------: | :-------------: |
-| 1 | Crawlability & Indexation   |   25%  | 62/100   |  D    | 80        | → flat          |
+| 1 | Crawlability & Indexation   |   25%  | 78/100   |  C+   | 85        | ↑↑ much improved |
 | 2 | On-Page SEO                 |   30%  | 75/100   |  C    | 82        | ↑ improved      |
 | 3 | Content & E-E-A-T           |   25%  | 78/100   |  C+   | 85        | ↑ improved      |
 | 4 | Trust & FTC Compliance      |   20%  | 80/100   |  B-   | 88        | ↑↑ much improved |
-| — | **Weighted overall**        | 100%   | **74**   | **C** | **~83 (B)** |             |
+| — | **Weighted overall**        | 100%   | **78**   | **C+** | **~85 (B)** |            |
 |   | Technical / Performance     |  n/a   | *Not verified* | — | — | — |
 |   | Structured Data             |  n/a   | *Not verified* | — | — | — |
 
-Realized overall = 62·0.25 + 75·0.30 + 78·0.25 + 80·0.20 ≈ **74**.
-"Potential" = 80·0.25 + 82·0.30 + 85·0.25 + 88·0.20 ≈ **83 (B)** — the
-upside available from clearing the faceted-URL duplicates (§2.1) and the
-last on-page polish (the 190-char slug + over-length titles, §2.2).
+Realized overall = 78·0.25 + 75·0.30 + 78·0.25 + 80·0.20 ≈ **78**.
+"Potential" = 85·0.25 + 82·0.30 + 85·0.25 + 88·0.20 ≈ **85 (B)** — the
+upside once Google re-crawls the crawl-hygiene fixes, the overlapping
+collections are rationalized, and the last on-page polish lands (190-char
+slug + over-length titles, §2.2).
 
 Grade bands: A 90–100 · B 80–89 · C 70–79 · D 60–69 · F < 60.
 
@@ -98,34 +102,48 @@ Grade bands: A 90–100 · B 80–89 · C 70–79 · D 60–69 · F < 60.
 
 ## 2. Category detail
 
-### 2.1 Crawlability & Indexation — 62 / 100 (D) `→ flat`
+### 2.1 Crawlability & Indexation — 78 / 100 (C+) `↑ improved`
 
 **What's working**
 - Indexed footprint has **grown** since 05-15: new product-review posts,
-  more buying guides, comparison product pages, and new collections
-  (Fire Extinguishers, Full Face Mask Respirators, Hearing Protection).
-  Google is actively discovering and indexing new content. `[CONFIRMED]`
-
-**What's dragging the score down**
-- **Faceted/duplicate URL still indexed (P0, unresolved).** The exact URL
-  flagged in the 05-15 audit is *still* in the index:
-  `…/collections/all/products/3m-2091-p100-respirator-filter?_pos=4&_fid=129fedb3b&_ss=c`.
-  The canonical fix and `robots.txt` rule have not taken effect (or aren't
-  yet published). `[CONFIRMED]`
-- **`/collections/all?page=5` indexed** — the thin all-products listing is
-  still crawlable/indexable and duplicates every product. `[CONFIRMED]`
-- **`/collections/master-collection` still public and indexed** — the
-  default Shopify placeholder collection was never hidden or renamed.
+  more buying guides, comparison product pages, and new collections.
+  Crawl is healthy — Google discovers and indexes new content within days.
   `[CONFIRMED]`
-- **New duplicate-content regression:** two different URLs index the *same*
-  3M 6002 review —
-  `/blogs/product-reviews/3m-6002-review` and
-  `/blogs/product-reviews/3m-6002-acid-gas-respirator-cartridge-review-niche-but-sometimes-the-right-pick`.
-  This is a fresh dupe created since the last audit. `[CONFIRMED]`
 
-*Ceiling lifters:* resolve canonical/faceted handling, `noindex` the
-all/master collections, and 301 one of the duplicate 3M 6002 review slugs
-to the other. (See audit §3, §4.1.)
+**Resolved (2026-05-26, operator-confirmed)**
+The four dominant duplicate-content problems have been addressed:
+1. **Faceted/parameter URLs (P0)** — canonical + `robots.txt` disallow on
+   `/collections/*?*` now in place.
+2. **`/collections/all`** — set to `noindex`.
+3. **`/collections/master-collection`** — hidden/`noindex`.
+4. **Duplicate 3M 6002 review** — one URL 301-redirected to the canonical.
+
+⚠️ **Realization is pending Google re-crawl.** These are correct directives,
+but the index cleanup (dupes dropping out, signals consolidating) only lands
+once Google re-crawls — so the search index will keep *showing* the old
+duplicate URLs for days-to-weeks. A near-term index recheck will look
+"unchanged" and should **not** be read as the fix failing. Two things still
+warrant a Search Console confirmation, since they can't be verified from
+here and are the error-prone kind: that the product canonical points to the
+clean `/products/<slug>` (not overridden by an app), and that the review
+redirect is a **301** (not a 302). `[operator-confirmed; re-crawl pending]`
+
+**What's still dragging the score down**
+- **Near-duplicate / overlapping collections** (not yet addressed):
+  `Respirator Filters and Cartridges` vs `3M Respirator Cartridges and
+  Filters`; `Hearing Protection` vs `Howard Leight Cordless Ear Plugs`; plus
+  `Respiratory Protection` / `Half Mask Respirators` / `Full Face Mask
+  Respirators` / `MSA Full Face Mask Respirator`. Near-identical naming
+  risks keyword cannibalization and thin overlapping category pages. Audit
+  which are distinct vs. redundant. `[CONFIRMED]`
+- **Unverifiable from here:** `robots.txt` contents, `sitemap.xml` (all URLs
+  200, accurate `lastmod`), and the GSC "Why pages aren't indexed" buckets
+  (*Duplicate without user-selected canonical*, *Crawled/Discovered – not
+  indexed*) that would quantify the cleanup. `[VERIFY]`
+
+*Ceiling lifters (to reach ~85 / B):* confirm the canonical/301 correctness
+in GSC, re-crawl to clear the dupes, and rationalize the overlapping
+collections. (See audit §3, §4.1.)
 
 ### 2.2 On-Page SEO — 75 / 100 (C) `↑ improved`
 
@@ -290,18 +308,20 @@ execution. Biggest score movement first:
 
 | Action | Lifts category | Audit ref |
 | ------ | -------------- | --------- |
-| ✅ **DONE (2026-05-26): trust pages indexed** — About / Contact / Affiliate Disclosure now live in Google | Trust **D→B−**, E-E-A-T **C→C+** | §5.1, §9 |
-| ✅ **DONE (2026-05-26): rogue brand suffix cleared** from live page titles (Google re-crawl pending) | On-Page **D→C** | §4.2 |
-| **Now the top lever:** fix canonical/faceted handling; `noindex` `/collections/all` & master collection; 301 one duplicate 3M 6002 review slug | Crawlability **D→B** | §3, §4.1 |
-| 301 the 190-char BearKat slug; trim over-length guide titles to ~55–60 chars; (optional) standardize one title separator | On-Page **C→B−** | §4.2–4.6 |
-| Apply the per-guide affiliate-disclosure snippet; confirm editorial-team page names real people; reconcile affiliate-vs-distributor wording | Trust + FTC compliance | §5.2–5.3 |
+| ✅ **DONE: trust pages indexed** — About / Contact / Affiliate Disclosure live in Google | Trust **D→B−**, E-E-A-T **C→C+** | §5.1, §9 |
+| ✅ **DONE: rogue brand suffix cleared** from live page titles | On-Page **D→C** | §4.2 |
+| ✅ **DONE: crawl-hygiene fixes 1–4** — faceted-URL canonical + robots disallow, `/collections/all` + Master Collection `noindex`, 301 on duplicate 3M 6002 review (re-crawl pending) | Crawlability **D→C+** | §3, §4.1 |
+| **Verify in GSC:** product canonical resolves to `/products/<slug>`; review redirect is a 301 (not 302); watch the "Duplicate / Crawled–not-indexed" buckets clear | locks in Crawlability **C+→B** | §9 |
+| Rationalize the overlapping collections (cannibalization); 301 the 190-char BearKat slug; trim over-length guide titles | Crawlability + On-Page **→B−** | §4.1–4.6 |
+| Apply the per-guide affiliate-disclosure snippet; name a real reviewer; reconcile affiliate-vs-distributor wording | Trust + FTC compliance | §5.2–5.3 |
 | Run PageSpeed + read robots/sitemap/JSON-LD on-site | Unlocks the 2 unscored categories | §6, §8, §9 |
 
-The two big session wins (trust indexation + rogue-brand cleanup) are
-**done**. The single biggest remaining lever is now **crawl hygiene** —
-clearing the faceted-URL duplicates and the double-indexed 3M 6002 review
-(§2.1). That plus the last on-page polish moves the overall from **C (74)**
-toward a low **B (~83)** with no new content required.
+The three big session wins (trust indexation + rogue-brand cleanup +
+crawl-hygiene fixes) are **done**, taking the site to **C+ (78)** — ~2
+points shy of a **B**. The remaining gap is small and mechanical: let Google
+re-crawl the crawl fixes, rationalize the overlapping collections, and
+finish the on-page polish. That moves the overall to a solid **B (~85)** with
+no new content required.
 
 ---
 
