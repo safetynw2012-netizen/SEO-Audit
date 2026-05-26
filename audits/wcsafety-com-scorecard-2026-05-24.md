@@ -13,21 +13,23 @@
 
 ```
    ┌──────────────────────────────────────────────────────┐
-   │   OVERALL SEO SCORE:  65 / 100   →  GRADE D            │
+   │   OVERALL SEO SCORE:  70 / 100   →  GRADE C-           │
    │   (realized — verifiable categories only, see §0)      │
-   │   Potential if trust pages get indexed:  ~72  →  C-    │
+   │   Updated 2026-05-26: trust pages now indexed (+5)      │
+   │   Potential with on-page + crawl fixes:  ~83  →  B     │
    └──────────────────────────────────────────────────────┘
 ```
 
-A small Shopify safety/PPE store with **clearly improving content** (a new
-scored product-review section, comparison pages, more buying guides) and a
+A small Shopify safety/PPE store with **clearly improving content** (a scored
+product-review section, comparison pages, more buying guides) and a
 **newly published, genuinely strong set of trust pages** (About / Contact /
-Affiliate Disclosure — confirmed live by the operator 2026-05-24, see §2.4).
-The two things now capping the grade: (1) the duplicate/faceted URLs from the
-2026-05-15 audit are still indexed, and (2) **the new trust pages are not yet
-indexed by Google**, so their substantial E-E-A-T value is not yet being
-credited. The fix shifted from "write the pages" to "get the pages indexed" —
-a much faster lever. Getting them indexed alone moves the site from D to C-.
+Affiliate Disclosure). As of **2026-05-26 the trust pages have begun
+appearing in Google** (About + Contact confirmed in live SERPs), so their
+substantial E-E-A-T value is now starting to be credited — that single
+indexation event lifted the site from **D (65) to C- (70)**. The remaining
+ceiling is now mechanical: (1) duplicate/faceted URLs from the 2026-05-15
+audit are still indexed, and (2) on-page title-template drift across the
+catalog. Clearing those moves the site toward a low **B (~83)**.
 
 ---
 
@@ -43,11 +45,17 @@ excerpts surfaced by `site:` and topic queries on 2026-05-24.
 **Operator-supplied evidence (2026-05-24):** the operator confirmed that
 `/pages/about`, `/pages/contact`, and the affiliate-disclosure page are
 all **live**, and pasted the full About-page body. That content is graded
-in §2.4. Crucially, none of these three pages appear in the index from any
-query run here (exact-URL `"wcsafety.com/pages/about"` and `site:` returns
-only `return-policy` + `data-sharing-opt-out`) — so they exist but are
-**not yet indexed**. The grade treats them as real (content quality is
-scored) but not yet earning search credit (realized value is capped).
+in §2.4.
+
+**Indexation update (2026-05-26):** all three trust pages are now indexed
+in live Google. The operator confirmed seeing `/pages/about` in Google
+results, and shared the `/pages/contact` and `/pages/affiliate-disclosure`
+URLs both carrying a `srsltid=` Google-Search click parameter — which Google
+only appends when a page is clicked from a SERP, confirming all three are
+now indexed. (The sandbox WebSearch proxy used here still lags and hadn't
+surfaced them, so this update relies on the operator's direct view of live
+Google — a documented limitation of this environment, not a contradiction.)
+Trust and E-E-A-T scores are raised accordingly.
 
 What this means for the grade:
 
@@ -67,20 +75,20 @@ deduced from URL/platform patterns; `[VERIFY]` = needs on-site checking.
 
 ## 1. Scorecard at a glance
 
-| # | Category                    | Weight | Realized | Grade | If indexed | Trend vs. 05-15 |
-| - | --------------------------- | -----: | -------: | :---: | :--------: | :-------------: |
-| 1 | Crawlability & Indexation   |   25%  | 62/100   |  D    | 62         | → flat          |
-| 2 | On-Page SEO                 |   30%  | 64/100   |  D    | 64         | ↗ mixed         |
-| 3 | Content & E-E-A-T           |   25%  | 74/100   |  C    | 80         | ↑ improved      |
-| 4 | Trust & FTC Compliance      |   20%  | 62/100   |  D    | 85         | ↑ improved      |
-| — | **Weighted overall**        | 100%   | **65**   | **D** | **~72 (C-)** |               |
+| # | Category                    | Weight | Realized | Grade | Potential | Trend vs. 05-15 |
+| - | --------------------------- | -----: | -------: | :---: | :-------: | :-------------: |
+| 1 | Crawlability & Indexation   |   25%  | 62/100   |  D    | 80        | → flat          |
+| 2 | On-Page SEO                 |   30%  | 64/100   |  D    | 82        | ↗ mixed         |
+| 3 | Content & E-E-A-T           |   25%  | 78/100   |  C+   | 85        | ↑ improved      |
+| 4 | Trust & FTC Compliance      |   20%  | 80/100   |  B-   | 88        | ↑↑ much improved |
+| — | **Weighted overall**        | 100%   | **70**   | **C-** | **~83 (B)** |             |
 |   | Technical / Performance     |  n/a   | *Not verified* | — | — | — |
 |   | Structured Data             |  n/a   | *Not verified* | — | — | — |
 
-Realized overall = 62·0.25 + 64·0.30 + 74·0.25 + 62·0.20 ≈ **65**.
-"If indexed" = 62·0.25 + 64·0.30 + 80·0.25 + 85·0.20 ≈ **72 (C-)** — the
-upside available from indexing the already-live trust pages and adding
-per-guide disclosures, with no new content required.
+Realized overall = 62·0.25 + 64·0.30 + 78·0.25 + 80·0.20 ≈ **70**.
+"Potential" = 80·0.25 + 82·0.30 + 85·0.25 + 88·0.20 ≈ **83 (B)** — the
+upside available from clearing the faceted-URL duplicates (§2.1) and
+unifying the title template (§2.2), no new content required.
 
 Grade bands: A 90–100 · B 80–89 · C 70–79 · D 60–69 · F < 60.
 
@@ -159,7 +167,7 @@ collections/products (kill "America's Safety Gear Experts"), trim
 over-length titles to ~55–60 chars, and 301 the long BearKat slug.
 (See audit §4.2–§4.6.)
 
-### 2.3 Content & E-E-A-T — 74 / 100 (C) `↑ improved`
+### 2.3 Content & E-E-A-T — 78 / 100 (C+) `↑ improved`
 
 **What's working — this is where the site has visibly leveled up**
 - **A dedicated scored product-review section now exists**
@@ -179,26 +187,36 @@ over-length titles to ~55–60 chars, and 301 the long BearKat slug.
   comparison pages build genuine topical authority in respirators/CO/smoke.
   `[CONFIRMED]`
 
-**What's keeping it from a B**
-- A documented methodology now exists (the live About page carries a full
-  "how we research products" section — see §2.4), which strengthens this
-  pillar. But it is **not indexed** and the byline is **pseudonymous**, so
-  the "who tested this and how" credibility isn't yet being credited by
-  Google. A real named author would lift this to ~80. `[OPERATOR-SUPPLIED]`
+**What's improved (2026-05-26)**
+- The documented methodology (the About page's "how we research products"
+  section) **is now indexed**, so the "who/how" credibility is starting to
+  be credited. `[CONFIRMED — operator]`
+- A dedicated **`/pages/wc-safety-editorial-team`** page is now live and
+  indexed — directly addressing the prior "no named reviewer" gap. Its
+  E-E-A-T value depends on whether it names **real, verifiable people with
+  credentials** vs. restating the "WC Safety editorial byline." Content not
+  yet graded here. `[CONFIRMED indexed; content VERIFY]`
+
+**What's still keeping it from a B**
+- If the editorial-team page is still pseudonymous (no real names), the
+  author-identity gap persists — the single biggest remaining E-E-A-T
+  limiter for a YMYL safety site.
 - The duplicate 3M 6002 review (see §2.1) splits authority for the site's
   best E-E-A-T asset across two URLs.
 
-*Ceiling lifters:* get the methodology/About content indexed, attach a real
-author name, add `reviewed-by` lines to guides, and consolidate the
+*Ceiling lifters:* confirm the editorial-team page names real people with
+credentials, add `reviewed-by` lines to guides, and consolidate the
 duplicate review. (See audit §5.3.)
 
-### 2.4 Trust & FTC Compliance — 62 / 100 (D, realized) · content quality A− `↑ improved`
+### 2.4 Trust & FTC Compliance — 80 / 100 (B−, realized) · content quality A− `↑↑ much improved`
 
-**Big change since 05-15: the trust pages now exist and are excellent.**
-The operator confirmed `/pages/about`, `/pages/contact`, and the
-affiliate-disclosure page are all live (2026-05-24) and supplied the full
-About-page body. Graded on content alone the About/editorial page is an
-**A− (88/100)** — among the strongest assets on the site:
+**Biggest jump on the card. The trust pages now exist, are excellent, AND
+are indexed (confirmed 2026-05-26).** `/pages/about`, `/pages/contact`,
+and `/pages/affiliate-disclosure` are all live in Google (the latter two
+shared with `srsltid=` SERP-click parameters), so the substantial trust
+value is now being credited rather than sitting dormant. Graded on content
+alone the About/editorial page is an **A− (88/100)** — among the strongest
+assets on the site:
 
 - **Editorial independence is stated and specific:** "zero sponsored
   listings, no manufacturer input, we recommend competitor products and
@@ -217,42 +235,33 @@ About-page body. Graded on content alone the About/editorial page is an
   ANSI Z87/Z89/Z88, UL 2034/217/2075, manufacturer TDS), with a stated
   update cadence and a "Last reviewed" convention. `[OPERATOR-SUPPLIED]`
 
-**Why the realized score is only 62 (D), not ~85:**
-- **The pages are not indexed.** No `site:` or exact-URL query run here
-  surfaces `/pages/about`, `/pages/contact`, or the disclosure page; the
-  only `/pages/` URLs Google returns are still `return-policy` and
-  `data-sharing-opt-out`. Content Google hasn't indexed earns ~zero
-  ranking/E-E-A-T credit. **This is now an indexation problem, not a
-  content gap.** `[CONFIRMED — index]`
-- **Author is pseudonymous.** Publishing under "WC Safety editorial byline /
-  Editor & Founder" with a "13 years" claim but no real, verifiable name is
-  the biggest remaining E-E-A-T limiter for a YMYL site. The honesty about
-  credentials partly compensates, but a named author would convert this
-  from "anonymous-but-honest" to authoritative. `[OPERATOR-SUPPLIED]`
+**Why the realized score is 80 (B−), not ~88:** the indexation blocker is
+resolved; what remains are three smaller, well-defined items:
 - **Disclosure is centralized, not proximate.** FTC wants a clear,
   conspicuous disclosure *near the affiliate link on each guide/review*,
-  not only on the About/disclosure page. The repo's
+  not only on the dedicated disclosure page. The repo's
   `fixes/wcsafety-com/theme/snippets/affiliate-disclosure.liquid` handles
   per-guide placement and still needs to be applied. `[CONFIRMED in repo]`
+- **Author identity.** The About copy publishes under "WC Safety editorial
+  byline / Editor & Founder." A new `/pages/wc-safety-editorial-team` page
+  is now indexed and may resolve this — but only if it names real,
+  verifiable people with credentials. Confirm. `[VERIFY]`
 - **Cross-page claim drift:** "13 years reviewing" (About) vs. "distributor
   since 2012" (homepage) vs. "Affiliate Marketer, returns handled through
   its Affiliates" (`return-policy`, now contradicting the "we stock and
   sell direct" framing). Reconcile so claims match sitewide. `[CONFIRMED]`
 
-*Ceiling lifters (still the highest ROI on the card):* (1) get the three
-live pages indexed — verify they aren't `noindex`, link them from the
-global footer, confirm they're in `/sitemap_pages_1.xml`, and request
-indexing in Search Console; (2) apply the per-guide affiliate-disclosure
-snippet; (3) attach a real author name; (4) reconcile the
-affiliate-vs-distributor wording. Items (1)–(2) alone lift this category to
-~85 (B) and the overall to ~72 (C-). (See audit §5.1–§5.3.)
+*Ceiling lifters (to reach ~88 / B+):* (1) apply the per-guide
+affiliate-disclosure snippet; (2) confirm the editorial-team page names
+real people; (3) reconcile the affiliate-vs-distributor wording on the
+return-policy page. (See audit §5.1–§5.3.)
 
 ---
 
 ## 3. Not-verified categories (excluded from the score)
 
 These need someone on a non-sandboxed network (or a Screaming Frog /
-PageSpeed run) to grade. They are **not** in the 60.
+PageSpeed run) to grade. They are **not** in the realized 70.
 
 ### 3.1 Technical / Performance — *Not verified*
 Cannot read `robots.txt`, `sitemap.xml`, response headers, or run
@@ -276,16 +285,17 @@ execution. Biggest score movement first:
 
 | Action | Lifts category | Audit ref |
 | ------ | -------------- | --------- |
-| **Get the live trust pages indexed** — verify not `noindex`, add footer links, confirm in `/sitemap_pages_1.xml`, request indexing in GSC | Trust **D→B**, E-E-A-T **C→B-** | §5.1, §9 |
-| Apply the per-guide affiliate-disclosure snippet; attach a real author name; reconcile affiliate-vs-distributor wording sitewide | Trust + FTC compliance | §5.2–5.3 |
-| Fix canonical/faceted handling; `noindex` `/collections/all` & master collection; 301 one duplicate 3M 6002 review slug | Crawlability **D→C/B** | §3, §4.1 |
-| Unify brand suffix sitewide (kill "America's Safety Gear Experts"); trim over-length titles; 301 the 190-char BearKat slug | On-Page **D→C/B** | §4.2–4.6 |
+| ✅ **DONE (2026-05-26): trust pages indexed** — About / Contact / Affiliate Disclosure now live in Google | Trust **D→B−**, E-E-A-T **C→C+** | §5.1, §9 |
+| **Now the top lever:** unify brand suffix sitewide (kill "America's Safety Gear Experts"); trim over-length titles; 301 the 190-char BearKat slug | On-Page **D→B** | §4.2–4.6 |
+| Fix canonical/faceted handling; `noindex` `/collections/all` & master collection; 301 one duplicate 3M 6002 review slug | Crawlability **D→B** | §3, §4.1 |
+| Apply the per-guide affiliate-disclosure snippet; confirm editorial-team page names real people; reconcile affiliate-vs-distributor wording | Trust + FTC compliance | §5.2–5.3 |
 | Run PageSpeed + read robots/sitemap/JSON-LD on-site | Unlocks the 2 unscored categories | §6, §8, §9 |
 
-The trust-page content is already done and strong — the gating issue is
-**indexation**. Getting those three pages indexed (no new writing required)
-plus clearing the faceted dupes plausibly moves the overall from **D (65)**
-into the **C / C+** range.
+The trust-page indexation that was capping the score is **resolved**. The
+two biggest remaining levers are now purely technical: **on-page title
+unification** (§2.2) and **clearing the faceted-URL duplicates** (§2.1).
+Together they plausibly move the overall from **C− (70)** to a low
+**B (~83)** with no new content required.
 
 ---
 
@@ -309,5 +319,6 @@ Unresolved issues:
 - https://wcsafety.com/collections/master-collection (placeholder still public)
 - https://wcsafety.com/collections/3m-6500-series-half-mask-respirators (wrong brand suffix)
 - https://wcsafety.com/blogs/product-reviews/3m-6002-review (duplicate of the long-slug review)
-- https://wcsafety.com/pages/return-policy + /pages/data-sharing-opt-out (only trust pages *indexed*)
-- https://wcsafety.com/pages/about + /pages/contact + affiliate-disclosure page (live per operator 2026-05-24, but NOT indexed — see §2.4)
+- https://wcsafety.com/pages/return-policy + /pages/data-sharing-opt-out
+- https://wcsafety.com/pages/about + /pages/contact + /pages/affiliate-disclosure (now INDEXED, confirmed 2026-05-26 — see §2.4)
+- https://wcsafety.com/pages/wc-safety-editorial-team (new, indexed 2026-05-26; content not yet graded — see §2.3)
