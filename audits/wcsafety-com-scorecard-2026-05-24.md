@@ -148,12 +148,18 @@ to the other. (See audit §3, §4.1.)
   - `- WC Safety` (ASCII hyphen): *Master Collection*, *Tools*,
     *Fire Extinguishers*
   - `| WC Safety` (pipe): several reviews/products
-  - `— America's Safety Gear Experts` (wrong brand entirely — now confirmed
-    on **≥3 pages** in the 2026-05-26 re-sweep):
+  - `— America's Safety Gear Experts` (wrong brand entirely — in Google's
+    SERP **`<title>` tags**, not visible body text — on these 3 listings as
+    of the 2026-05-26 sweep):
     `/collections/3m-6500-series-half-mask-respirators`,
     `/collections/3m-respirator-cartridges-and-filters`, and the product
     `/products/3m-1100-foam-ear-plugs-cordless-nrr-29` (plus the earlier
-    `brk-first-alert-9120bff-…`)
+    `brk-first-alert-9120bff-…`). **Operator disputes this is on the live
+    site (2026-05-26).** Plausible: the evidence is from the search index,
+    which is known to lag live Google here — if the SEO title field was
+    already cleared, these are stale cached titles pending re-crawl. Needs
+    a view-source / Shopify "Search engine listing preview" check on the 3
+    URLs to settle definitively. `[INDEX — may be stale]`
   - no suffix at all on some product/listing snippets
   
   This is the single biggest on-page drag and signals SEO metafields still
