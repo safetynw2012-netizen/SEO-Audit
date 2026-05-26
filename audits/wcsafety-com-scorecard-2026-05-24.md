@@ -223,13 +223,26 @@ standardize on one title separator. (See audit §4.2–§4.6.)
 - **Author identity is still collective/pseudonymous.** No real, verifiable
   person with credentials is attached to the reviews — the single biggest
   remaining E-E-A-T limiter for a YMYL safety site. Naming ≥1 real reviewer
-  with a bio would push this category to ~85 (B).
-- The duplicate 3M 6002 review (see §2.1) splits authority for the site's
-  best E-E-A-T asset across two URLs.
+  with a bio would push this category to ~85 (B). (No honesty tradeoff —
+  pure upside.)
+- **Thin on the "Experience" signal — but DO NOT fabricate it.** The site
+  deliberately and honestly positions as a *regulatory/spec audit, not
+  hands-on testing* (see §2.4), which is correct — faking first-hand testing
+  on safety gear would be a Trust violation. The nuance: Google's
+  "Experience" signal is satisfied by **evidence of genuine engagement**
+  (original photos of the actual unit, a personally verified measurement),
+  **not by first-person voice** — so it can be shown truthfully and in
+  third person, or skipped entirely in favor of competing on
+  compliance/selection intent. This is a strategic positioning choice, not
+  a mandate to write first-person claims. `[note: reconciles with §2.4]`
+- The duplicate 3M 6002 review (see §2.1) split authority across two URLs;
+  being resolved via 301 (re-crawl pending).
 
-*Ceiling lifters:* confirm the editorial-team page names real people with
-credentials, add `reviewed-by` lines to guides, and consolidate the
-duplicate review. (See audit §5.3.)
+*Ceiling lifters:* name ≥1 real reviewer with credentials and add
+`reviewed-by` bylines to guides (the high-impact, no-tradeoff fix); decide
+the Experience positioning (add genuine evidence vs. own the spec-audit
+lane); set a December refresh cadence for the "Best X 2026" cluster and
+de-cannibalize the overlapping smoke-detector guides. (See audit §5.3.)
 
 ### 2.4 Trust & FTC Compliance — 80 / 100 (B−, realized) · content quality A− `↑↑ much improved`
 
