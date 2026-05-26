@@ -13,24 +13,25 @@
 
 ```
    ┌──────────────────────────────────────────────────────┐
-   │   OVERALL SEO SCORE:  70 / 100   →  GRADE C-           │
+   │   OVERALL SEO SCORE:  74 / 100   →  GRADE C            │
    │   (realized — verifiable categories only, see §0)      │
-   │   Full regrade 2026-05-26: trust pages indexed (+5);    │
-   │   on-page + crawl issues unchanged → score holds at 70  │
-   │   Potential with on-page + crawl fixes:  ~83  →  B     │
+   │   2026-05-26: trust pages indexed (+5); rogue-brand     │
+   │   title cleared on live site (+4) → 70 → 74             │
+   │   Potential with crawl + slug/title polish:  ~83 → B   │
    └──────────────────────────────────────────────────────┘
 ```
 
-A small Shopify safety/PPE store with **clearly improving content** (a scored
-product-review section, comparison pages, more buying guides) and a
-**newly published, genuinely strong set of trust pages** (About / Contact /
-Affiliate Disclosure). As of **2026-05-26 the trust pages have begun
-appearing in Google** (About + Contact confirmed in live SERPs), so their
-substantial E-E-A-T value is now starting to be credited — that single
-indexation event lifted the site from **D (65) to C- (70)**. The remaining
-ceiling is now mechanical: (1) duplicate/faceted URLs from the 2026-05-15
-audit are still indexed, and (2) on-page title-template drift across the
-catalog. Clearing those moves the site toward a low **B (~83)**.
+A small Shopify safety/PPE store that has **moved fast in the right
+direction**: a scored product-review section and growing buying-guide
+library, a genuinely strong set of trust pages (About / Contact / Affiliate
+Disclosure, all now indexed as of 2026-05-26), and — confirmed by the
+operator 2026-05-26 — the rogue "America's Safety Gear Experts" brand suffix
+**cleared from the live page titles** (Google's listings will catch up on
+re-crawl). Those two wins lifted the site from **D (65) → C (74)** in this
+session. The remaining ceiling is now mostly crawl hygiene: duplicate/faceted
+URLs from the 2026-05-15 audit are still indexed (§2.1), plus a few on-page
+polish items (one 190-char slug, some over-length titles). Clearing those
+moves the site toward a low **B (~83)**.
 
 ---
 
@@ -79,17 +80,17 @@ deduced from URL/platform patterns; `[VERIFY]` = needs on-site checking.
 | # | Category                    | Weight | Realized | Grade | Potential | Trend vs. 05-15 |
 | - | --------------------------- | -----: | -------: | :---: | :-------: | :-------------: |
 | 1 | Crawlability & Indexation   |   25%  | 62/100   |  D    | 80        | → flat          |
-| 2 | On-Page SEO                 |   30%  | 64/100   |  D    | 82        | ↗ mixed         |
+| 2 | On-Page SEO                 |   30%  | 75/100   |  C    | 82        | ↑ improved      |
 | 3 | Content & E-E-A-T           |   25%  | 78/100   |  C+   | 85        | ↑ improved      |
 | 4 | Trust & FTC Compliance      |   20%  | 80/100   |  B-   | 88        | ↑↑ much improved |
-| — | **Weighted overall**        | 100%   | **70**   | **C-** | **~83 (B)** |             |
+| — | **Weighted overall**        | 100%   | **74**   | **C** | **~83 (B)** |             |
 |   | Technical / Performance     |  n/a   | *Not verified* | — | — | — |
 |   | Structured Data             |  n/a   | *Not verified* | — | — | — |
 
-Realized overall = 62·0.25 + 64·0.30 + 78·0.25 + 80·0.20 ≈ **70**.
+Realized overall = 62·0.25 + 75·0.30 + 78·0.25 + 80·0.20 ≈ **74**.
 "Potential" = 80·0.25 + 82·0.30 + 85·0.25 + 88·0.20 ≈ **83 (B)** — the
-upside available from clearing the faceted-URL duplicates (§2.1) and
-unifying the title template (§2.2), no new content required.
+upside available from clearing the faceted-URL duplicates (§2.1) and the
+last on-page polish (the 190-char slug + over-length titles, §2.2).
 
 Grade bands: A 90–100 · B 80–89 · C 70–79 · D 60–69 · F < 60.
 
@@ -126,7 +127,7 @@ Grade bands: A 90–100 · B 80–89 · C 70–79 · D 60–69 · F < 60.
 all/master collections, and 301 one of the duplicate 3M 6002 review slugs
 to the other. (See audit §3, §4.1.)
 
-### 2.2 On-Page SEO — 64 / 100 (D) `↗ mixed`
+### 2.2 On-Page SEO — 75 / 100 (C) `↑ improved`
 
 **What's working**
 - **Homepage title upgraded** to a keyword-rich
@@ -141,41 +142,33 @@ to the other. (See audit §3, §4.1.)
   `/products/n95-vs-p100-respirator`. Good commercial-intent coverage and
   exactly the slug discipline the audit asked for. `[CONFIRMED]`
 
-**What's dragging the score down**
-- **Title-template drift got *worse*, not better (P1, unresolved).** The
-  index now shows **five** different brand-suffix conventions in use:
-  - `— WC Safety` (em-dash, the intended template)
-  - `- WC Safety` (ASCII hyphen): *Master Collection*, *Tools*,
-    *Fire Extinguishers*
-  - `| WC Safety` (pipe): several reviews/products
-  - `— America's Safety Gear Experts` (wrong brand entirely — in Google's
-    SERP **`<title>` tags**, not visible body text — on these 3 listings as
-    of the 2026-05-26 sweep):
-    `/collections/3m-6500-series-half-mask-respirators`,
-    `/collections/3m-respirator-cartridges-and-filters`, and the product
-    `/products/3m-1100-foam-ear-plugs-cordless-nrr-29` (plus the earlier
-    `brk-first-alert-9120bff-…`). **Operator disputes this is on the live
-    site (2026-05-26).** Plausible: the evidence is from the search index,
-    which is known to lag live Google here — if the SEO title field was
-    already cleared, these are stale cached titles pending re-crawl. Needs
-    a view-source / Shopify "Search engine listing preview" check on the 3
-    URLs to settle definitively. `[INDEX — may be stale]`
-  - no suffix at all on some product/listing snippets
-  
-  This is the single biggest on-page drag and signals SEO metafields still
-  aren't centrally managed. `[CONFIRMED]`
-- **Over-length titles** that will truncate in SERPs, e.g.
+**Resolved (2026-05-26)**
+- **The rogue "America's Safety Gear Experts" brand suffix is gone from the
+  live page `<title>` tags** — operator-confirmed via view-source. This was
+  the single worst on-page issue (a conflicting second brand identity in the
+  SERPs), and clearing it is what lifts this category from D to C. Google's
+  search listings still show the old titles on a few URLs
+  (`/collections/3m-6500-series-half-mask-respirators` etc.) but those are
+  **stale cached snapshots that will update on re-crawl**. `[operator-confirmed]`
+
+**What's still dragging the score down**
+- **Minor separator inconsistency remains** (cosmetic, low SEO impact): the
+  SERP titles mix `— WC Safety` (em-dash), `- WC Safety` (ASCII hyphen on
+  *Master Collection*, *Tools*, *Fire Extinguishers*), and `| WC Safety`
+  (pipe on some reviews/products). Worth standardizing on one for polish,
+  but it's no longer a brand-confusion problem. `[CONFIRMED]`
+- **Over-length titles** that truncate in SERPs, e.g.
   `3M Respirator Filter & Cartridge Guide (2026): Charts, Comparisons &
   Job-Site Selection — WC Safety` (~95 chars) and the CO-detector guide
   (~78 chars). `[CONFIRMED]`
 - **The ~190-char MCR BearKat product slug is still live** despite the
-  title being cleaned up — the URL was never shortened/redirected.
-  `[CONFIRMED]`
+  title being cleaned up — the URL was never shortened/redirected. This is
+  the main remaining on-page drag. `[CONFIRMED]`
 
-*Ceiling lifters:* unify the brand suffix to one separator across all
-collections/products (kill "America's Safety Gear Experts"), trim
-over-length titles to ~55–60 chars, and 301 the long BearKat slug.
-(See audit §4.2–§4.6.)
+*Ceiling lifters (to reach ~82 / B−):* 301 the long BearKat slug to
+something like `/products/mcr-bearkat-bkh20-bifocal-safety-glasses`, trim
+the over-length guide titles to ~55–60 chars, and (optional polish)
+standardize on one title separator. (See audit §4.2–§4.6.)
 
 ### 2.3 Content & E-E-A-T — 78 / 100 (C+) `↑ improved`
 
@@ -298,16 +291,17 @@ execution. Biggest score movement first:
 | Action | Lifts category | Audit ref |
 | ------ | -------------- | --------- |
 | ✅ **DONE (2026-05-26): trust pages indexed** — About / Contact / Affiliate Disclosure now live in Google | Trust **D→B−**, E-E-A-T **C→C+** | §5.1, §9 |
-| **Now the top lever:** unify brand suffix sitewide (kill "America's Safety Gear Experts"); trim over-length titles; 301 the 190-char BearKat slug | On-Page **D→B** | §4.2–4.6 |
-| Fix canonical/faceted handling; `noindex` `/collections/all` & master collection; 301 one duplicate 3M 6002 review slug | Crawlability **D→B** | §3, §4.1 |
+| ✅ **DONE (2026-05-26): rogue brand suffix cleared** from live page titles (Google re-crawl pending) | On-Page **D→C** | §4.2 |
+| **Now the top lever:** fix canonical/faceted handling; `noindex` `/collections/all` & master collection; 301 one duplicate 3M 6002 review slug | Crawlability **D→B** | §3, §4.1 |
+| 301 the 190-char BearKat slug; trim over-length guide titles to ~55–60 chars; (optional) standardize one title separator | On-Page **C→B−** | §4.2–4.6 |
 | Apply the per-guide affiliate-disclosure snippet; confirm editorial-team page names real people; reconcile affiliate-vs-distributor wording | Trust + FTC compliance | §5.2–5.3 |
 | Run PageSpeed + read robots/sitemap/JSON-LD on-site | Unlocks the 2 unscored categories | §6, §8, §9 |
 
-The trust-page indexation that was capping the score is **resolved**. The
-two biggest remaining levers are now purely technical: **on-page title
-unification** (§2.2) and **clearing the faceted-URL duplicates** (§2.1).
-Together they plausibly move the overall from **C− (70)** to a low
-**B (~83)** with no new content required.
+The two big session wins (trust indexation + rogue-brand cleanup) are
+**done**. The single biggest remaining lever is now **crawl hygiene** —
+clearing the faceted-URL duplicates and the double-indexed 3M 6002 review
+(§2.1). That plus the last on-page polish moves the overall from **C (74)**
+toward a low **B (~83)** with no new content required.
 
 ---
 
