@@ -13,12 +13,14 @@
 
 ```
    ┌──────────────────────────────────────────────────────┐
-   │   OVERALL SEO SCORE:  79 / 100   →  GRADE C+           │
+   │   OVERALL SEO SCORE:  78 / 100   →  GRADE C+           │
    │   (realized — verifiable categories only, see §0)      │
-   │   65 → 70 → 74 → 78 → 79 this session — 1 pt from B.    │
-   │   Re-scan 2026-05-26: continued title + content gains   │
-   │   (+1) offset by new findings — see §0.                 │
-   │   Potential once re-crawled + polished:  ~85  →  B     │
+   │   65 → 70 → 74 → 78 → 79 → 78 across the session.       │
+   │   Deep-sweep 2026-06-12: dedup fixes landing as expected │
+   │   (+ confirmed), but new structural finding (comparison-  │
+   │   page sprawl across 3 URL paths) drops Crawlability     │
+   │   78 → 75 (C). Overall flat at 78.                      │
+   │   Potential once sprawl consolidated:  ~85 → B          │
    └──────────────────────────────────────────────────────┘
 ```
 
@@ -77,6 +79,24 @@ recommend a view-source check on that product, and (2) the
 ("WC Safety | Expert Industrial PPE Reviews & ANSI/OSHA Compliance Guide")
 rather than a distinct collection title. Score moves **78 → 79 (still C+)**.
 
+**Deep-sweep (2026-06-12, ~2.5 weeks later):** targeted Shopify-specific
+crawl-trap queries surfaced a **new structural finding** I had previously
+missed (see §2.1): comparison-page sprawl across three URL patterns
+(`/products/<a>-vs-<b>`, `/collections/<a>-vs-<b>`, and
+`/blogs/guides/<a>-vs-<b>`) for the same topic — severe internal
+cannibalization plus 3× crawl waste per comparison. Crawlability drops
+**78 → 75 (C)**, overall settles **79 → 78 (still C+)**. Offsetting
+positive: dedup fixes appear to be landing (faceted URL,
+`/collections/master-collection`, and `/collections/all?page=5` no longer
+surface in dedicated queries). **Concerning persistence:** the rogue
+"America's Safety Gear Experts" titles are still in the index on at least
+3 URLs after 2.5 weeks of re-crawl opportunity — recommend view-source on
+`/collections/3m-6500-series-half-mask-respirators`,
+`/products/3m-1100-foam-ear-plugs-cordless-nrr-29`, and the BRK 9120BFF
+product to confirm whether the SEO title field was actually cleared on
+those specific items (the earlier "cleared" confirmation may have only
+covered a subset).
+
 What this means for the grade:
 
 - **Scored categories (observable from the index):** Crawlability &
@@ -97,15 +117,15 @@ deduced from URL/platform patterns; `[VERIFY]` = needs on-site checking.
 
 | # | Category                    | Weight | Realized | Grade | Potential | Trend vs. 05-15 |
 | - | --------------------------- | -----: | -------: | :---: | :-------: | :-------------: |
-| 1 | Crawlability & Indexation   |   25%  | 78/100   |  C+   | 85        | ↑↑ much improved |
+| 1 | Crawlability & Indexation   |   25%  | 75/100   |  C    | 85        | ↑ improved (deeper finding logged) |
 | 2 | On-Page SEO                 |   30%  | 77/100   |  C+   | 82        | ↑ improved      |
 | 3 | Content & E-E-A-T           |   25%  | 80/100   |  B-   | 86        | ↑↑ much improved |
 | 4 | Trust & FTC Compliance      |   20%  | 80/100   |  B-   | 88        | ↑↑ much improved |
-| — | **Weighted overall**        | 100%   | **79**   | **C+** | **~85 (B)** |            |
+| — | **Weighted overall**        | 100%   | **78**   | **C+** | **~85 (B)** |            |
 |   | Technical / Performance     |  n/a   | *Not verified* | — | — | — |
 |   | Structured Data             |  n/a   | *Not verified* | — | — | — |
 
-Realized overall = 78·0.25 + 77·0.30 + 80·0.25 + 80·0.20 ≈ **79**.
+Realized overall = 75·0.25 + 77·0.30 + 80·0.25 + 80·0.20 ≈ **78**.
 "Potential" = 85·0.25 + 82·0.30 + 85·0.25 + 88·0.20 ≈ **85 (B)** — the
 upside once Google re-crawls the crawl-hygiene fixes, the overlapping
 collections are rationalized, and the last on-page polish lands (190-char
@@ -117,7 +137,7 @@ Grade bands: A 90–100 · B 80–89 · C 70–79 · D 60–69 · F < 60.
 
 ## 2. Category detail
 
-### 2.1 Crawlability & Indexation — 78 / 100 (C+) `↑ improved`
+### 2.1 Crawlability & Indexation — 75 / 100 (C) `↑ improved (with new structural finding)`
 
 **What's working**
 - Indexed footprint has **grown** since 05-15: new product-review posts,
@@ -143,18 +163,46 @@ here and are the error-prone kind: that the product canonical points to the
 clean `/products/<slug>` (not overridden by an app), and that the review
 redirect is a **301** (not a 302). `[operator-confirmed; re-crawl pending]`
 
+**Dedup fixes appear to be landing (2026-06-12 deep sweep, ~2.5 weeks after
+the directives went in):**
+- The faceted `_pos/_fid/_ss` URL no longer surfaces in a dedicated query.
+- `/collections/master-collection` no longer surfaces.
+- `/collections/all?page=5` no longer surfaces.
+- Confirm in GSC → Pages → "Duplicate without user-selected canonical" —
+  that bucket should be dropping. `[likely deindexed; confirm in GSC]`
+
 **What's still dragging the score down**
+- 🔴 **NEW (2026-06-12 deep sweep): comparison-page sprawl across 3 URL
+  patterns — the biggest structural crawl issue on the site.** The same
+  comparison topic is indexed at three distinct paths simultaneously, e.g.
+  the 3M 2091 vs 2097 topic appears at all of:
+  - `/products/3m-2091-vs-3m-2097`
+  - `/collections/3m-2091-vs-3m-2097`
+  - `/blogs/guides/3m-2091-vs-2097-filter`
+  
+  The pattern repeats across the cartridge lineup: `/products/3m-60921-vs-60923`
+  + `/collections/3m-60921-vs-60923-vs-60926-respirator-cartridges` + guide
+  variants; plus growing comparison-as-collections (`/collections/3m-60921-vs-3m-60926`,
+  `/collections/3m-60923-vs-3m-6001`, `/collections/3m-6001-vs-3m-6003`,
+  `/collections/3m-6001-vs-3m-6006`). Three of the operator's own pages
+  compete for the same query — internal cannibalization plus 3× crawl waste
+  per topic. The **content strategy is right; the URL strategy is wrong.**
+  
+  *Recommended fix:* pick one canonical URL pattern per comparison —
+  `/blogs/guides/<a>-vs-<b>` is the right type for long-form commercial-intent
+  content — then 301 the other two variants to it. Open question worth
+  checking: are the `/collections/<a>-vs-<b>` URLs hosting actual filtered
+  product grids (legitimate Shopify use), or just CMS-style content
+  misusing the `collection` page type? View-source decides. `[CONFIRMED]`
 - **Near-duplicate / overlapping collections** (not yet addressed):
   `Respirator Filters and Cartridges` vs `3M Respirator Cartridges and
   Filters`; `Hearing Protection` vs `Howard Leight Cordless Ear Plugs`; plus
   `Respiratory Protection` / `Half Mask Respirators` / `Full Face Mask
-  Respirators` / `MSA Full Face Mask Respirator`. Near-identical naming
-  risks keyword cannibalization and thin overlapping category pages. Audit
-  which are distinct vs. redundant. `[CONFIRMED]`
+  Respirators` / `MSA Full Face Mask Respirator` / `3M Half Mask Respirators`.
+  Near-identical naming risks keyword cannibalization. `[CONFIRMED]`
 - **Unverifiable from here:** `robots.txt` contents, `sitemap.xml` (all URLs
-  200, accurate `lastmod`), and the GSC "Why pages aren't indexed" buckets
-  (*Duplicate without user-selected canonical*, *Crawled/Discovered – not
-  indexed*) that would quantify the cleanup. `[VERIFY]`
+  200, accurate `lastmod`), and the GSC "Why pages aren't indexed" buckets.
+  `[VERIFY]`
 
 *Ceiling lifters (to reach ~85 / B):* confirm the canonical/301 correctness
 in GSC, re-crawl to clear the dupes, and rationalize the overlapping
