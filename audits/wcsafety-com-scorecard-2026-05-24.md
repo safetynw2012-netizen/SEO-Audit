@@ -13,11 +13,11 @@
 
 ```
    ┌──────────────────────────────────────────────────────┐
-   │   OVERALL SEO SCORE:  78 / 100   →  GRADE C+           │
+   │   OVERALL SEO SCORE:  79 / 100   →  GRADE C+           │
    │   (realized — verifiable categories only, see §0)      │
-   │   2026-05-26 session: trust pages indexed (+5);         │
-   │   rogue-brand title cleared (+4); crawl-hygiene         │
-   │   fixes 1–4 in place (+4) → 65 → 78. ~2 pts from B.     │
+   │   65 → 70 → 74 → 78 → 79 this session — 1 pt from B.    │
+   │   Re-scan 2026-05-26: continued title + content gains   │
+   │   (+1) offset by new findings — see §0.                 │
    │   Potential once re-crawled + polished:  ~85  →  B     │
    └──────────────────────────────────────────────────────┘
 ```
@@ -62,6 +62,21 @@ surfaced them, so this update relies on the operator's direct view of live
 Google — a documented limitation of this environment, not a contradiction.)
 Trust and E-E-A-T scores are raised accordingly.
 
+**Re-scan (2026-05-26, later in day):** the proxy has caught up — About and
+Affiliate Disclosure now visible in `site:/pages` queries. A full fresh
+sweep across every category surfaced significant positives (homepage title
+overhauled to *"WC Safety | Expert Industrial PPE Reviews & ANSI/OSHA
+Compliance Guide,"* most collection and product titles now keyword-enriched
+with standards info, content footprint expanded with a new
+`/blogs/reference/` section and many new reviews/guides). It also surfaced
+two **new actionable findings**: (1) the BRK First Alert 9120BFF product
+still shows *"America's Safety Gear Experts"* in its indexed title — this
+is a **4th URL** not in the 3 the operator earlier confirmed cleared;
+recommend a view-source check on that product, and (2) the
+`/collections/product-reviews` page is indexed with the **homepage title**
+("WC Safety | Expert Industrial PPE Reviews & ANSI/OSHA Compliance Guide")
+rather than a distinct collection title. Score moves **78 → 79 (still C+)**.
+
 What this means for the grade:
 
 - **Scored categories (observable from the index):** Crawlability &
@@ -83,14 +98,14 @@ deduced from URL/platform patterns; `[VERIFY]` = needs on-site checking.
 | # | Category                    | Weight | Realized | Grade | Potential | Trend vs. 05-15 |
 | - | --------------------------- | -----: | -------: | :---: | :-------: | :-------------: |
 | 1 | Crawlability & Indexation   |   25%  | 78/100   |  C+   | 85        | ↑↑ much improved |
-| 2 | On-Page SEO                 |   30%  | 75/100   |  C    | 82        | ↑ improved      |
-| 3 | Content & E-E-A-T           |   25%  | 78/100   |  C+   | 85        | ↑ improved      |
+| 2 | On-Page SEO                 |   30%  | 77/100   |  C+   | 82        | ↑ improved      |
+| 3 | Content & E-E-A-T           |   25%  | 80/100   |  B-   | 86        | ↑↑ much improved |
 | 4 | Trust & FTC Compliance      |   20%  | 80/100   |  B-   | 88        | ↑↑ much improved |
-| — | **Weighted overall**        | 100%   | **78**   | **C+** | **~85 (B)** |            |
+| — | **Weighted overall**        | 100%   | **79**   | **C+** | **~85 (B)** |            |
 |   | Technical / Performance     |  n/a   | *Not verified* | — | — | — |
 |   | Structured Data             |  n/a   | *Not verified* | — | — | — |
 
-Realized overall = 78·0.25 + 75·0.30 + 78·0.25 + 80·0.20 ≈ **78**.
+Realized overall = 78·0.25 + 77·0.30 + 80·0.25 + 80·0.20 ≈ **79**.
 "Potential" = 85·0.25 + 82·0.30 + 85·0.25 + 88·0.20 ≈ **85 (B)** — the
 upside once Google re-crawls the crawl-hygiene fixes, the overlapping
 collections are rationalized, and the last on-page polish lands (190-char
@@ -145,20 +160,25 @@ redirect is a **301** (not a 302). `[operator-confirmed; re-crawl pending]`
 in GSC, re-crawl to clear the dupes, and rationalize the overlapping
 collections. (See audit §3, §4.1.)
 
-### 2.2 On-Page SEO — 75 / 100 (C) `↑ improved`
+### 2.2 On-Page SEO — 77 / 100 (C+) `↑ improved`
 
 **What's working**
-- **Homepage title upgraded** to a keyword-rich
-  `Industrial Safety Equipment & PPE — WC Safety` (was the vague
-  "Your Home to Everything Safety"). `[CONFIRMED]`
-- **Product titles are now descriptive and standards-aware**, e.g.
-  `MCR Safety BearKat BKH20 … | ANSI Z87.1 Eye Protection` and
-  `3M 6200 Half Mask Respirator (Medium) | 6000 Series | NIOSH-Approved`.
-  Strong long-tail targeting. `[CONFIRMED]`
-- **Comparison pages with clean, short slugs** appeared:
+- **Homepage title overhauled (2026-05-26 re-scan):** now
+  `WC Safety | Expert Industrial PPE Reviews & ANSI/OSHA Compliance Guide`
+  (previously `Industrial Safety Equipment & PPE — WC Safety`, before that
+  the vague "Your Home to Everything Safety"). Keyword-rich, positions the
+  site as a review/compliance authority. `[CONFIRMED]`
+- **Collection titles are now keyword-enriched**, e.g.
+  `Safety Goggles — Splash & Impact Rated for Work`,
+  `Hearing Protection — Ear Plugs & Ear Muffs | WC Safety`,
+  `3M Half Mask Respirators — 6000, 6500 & 7500 | WC Safety`. `[CONFIRMED]`
+- **Product titles are descriptive and standards-aware**, e.g.
+  `STUDSON SHK-1 Non-Vented Safety Helmet, Type 2 Class E | WC Safety`,
+  `Moldex 6835 Pura-Fit TouchFree EcoStation | Hands-Free NRR 33 Earplug
+  Dispenser — WC Safety`. Strong long-tail targeting. `[CONFIRMED]`
+- **Comparison pages with clean, short slugs**:
   `/products/3m-60921-vs-60923`, `/products/3m-2091-vs-3m-2097`,
-  `/products/n95-vs-p100-respirator`. Good commercial-intent coverage and
-  exactly the slug discipline the audit asked for. `[CONFIRMED]`
+  `/products/n95-vs-p100-respirator`. `[CONFIRMED]`
 
 **Resolved (2026-05-26)**
 - **The rogue "America's Safety Gear Experts" brand suffix is gone from the
@@ -170,25 +190,33 @@ collections. (See audit §3, §4.1.)
   **stale cached snapshots that will update on re-crawl**. `[operator-confirmed]`
 
 **What's still dragging the score down**
-- **Minor separator inconsistency remains** (cosmetic, low SEO impact): the
-  SERP titles mix `— WC Safety` (em-dash), `- WC Safety` (ASCII hyphen on
-  *Master Collection*, *Tools*, *Fire Extinguishers*), and `| WC Safety`
-  (pipe on some reviews/products). Worth standardizing on one for polish,
-  but it's no longer a brand-confusion problem. `[CONFIRMED]`
-- **Over-length titles** that truncate in SERPs, e.g.
-  `3M Respirator Filter & Cartridge Guide (2026): Charts, Comparisons &
-  Job-Site Selection — WC Safety` (~95 chars) and the CO-detector guide
-  (~78 chars). `[CONFIRMED]`
+- **NEW (re-scan 2026-05-26): possible 4th URL with the rogue brand.** The
+  BRK First Alert 9120BFF product is indexed as
+  `BRK First Alert 9120BFF/ SMI100-AC Smoke Detector, Hardwired Alarm wit—
+  America's Safety Gear Experts` — this was **not** in the 3 URLs the
+  operator earlier confirmed cleared. May be a missed page or another stale
+  cached title. **View-source check recommended** on
+  `/products/brk-first-alert-9120bff-smi100-ac-smoke-detector-hardwired-alarm-with-battery-backup-white-1-pack`.
+  `[INDEX — may be stale or missed]`
+- **NEW (re-scan 2026-05-26): `/collections/product-reviews` is indexed with
+  the homepage title** ("WC Safety | Expert Industrial PPE Reviews &
+  ANSI/OSHA Compliance Guide") instead of a distinct collection title. Set
+  a distinct SEO title in Shopify for this collection. `[CONFIRMED]`
+- **Over-length titles** that truncate in SERPs — e.g. the 3M Filter Guide
+  (~95 chars), the CO-detector guide (~78 chars), and now **the new OSHA
+  Flammable Cabinet reference page** which is truncating mid-word in the
+  SERP (`...29 CFR 1910.106 and NFPA 30 Expla — WC Safety`). `[CONFIRMED]`
 - **The ~190-char MCR BearKat product slug is still live** despite the
-  title being cleaned up — the URL was never shortened/redirected. This is
-  the main remaining on-page drag. `[CONFIRMED]`
+  title being cleaned up. `[CONFIRMED]`
+- **Minor separator inconsistency** (cosmetic): titles mix em-dash, pipe,
+  and ASCII hyphen. No longer brand-confusion, just polish. `[CONFIRMED]`
 
 *Ceiling lifters (to reach ~82 / B−):* 301 the long BearKat slug to
 something like `/products/mcr-bearkat-bkh20-bifocal-safety-glasses`, trim
 the over-length guide titles to ~55–60 chars, and (optional polish)
 standardize on one title separator. (See audit §4.2–§4.6.)
 
-### 2.3 Content & E-E-A-T — 78 / 100 (C+) `↑ improved`
+### 2.3 Content & E-E-A-T — 80 / 100 (B−) `↑↑ much improved`
 
 **What's working — this is where the site has visibly leveled up**
 - **A dedicated scored product-review section now exists**
@@ -203,9 +231,15 @@ standardize on one title separator. (See audit §4.2–§4.6.)
   claim ("authorized industrial safety distributor since 2012"). This is
   exactly the kind of trust signal Google's Reviews system rewards.
   `[CONFIRMED]`
-- **Topical depth expanded:** new guides (Best First Alert Smoke
-  Detectors, Best Smart Smoke Detectors, 3M Filter & Cartridge Guide) and
-  comparison pages build genuine topical authority in respirators/CO/smoke.
+- **Topical depth expanded — and continued to expand through 2026-05-26:**
+  the re-scan surfaced many new pieces — Best Respirator Cartridge for
+  Chlorine Gas, 3M 2091/2071/7093/60923 Reviews, 3M Ultimate FX FF-403 Full
+  Face Respirator Review (4.5/5), Hard Hat Classes Explained, Respirator
+  Filter Types Explained, How Long Do Respirator Cartridges Last, 3M
+  Organic Vapor Cartridges guide, and a **new `/blogs/reference/`
+  section** (e.g. *OSHA Flammable Cabinet Requirements: 29 CFR 1910.106
+  and NFPA 30*) that adds technical/regulatory authority on top of
+  buying-guide content. Genuine, fast topical-authority growth.
   `[CONFIRMED]`
 
 **What's improved (2026-05-26)**
