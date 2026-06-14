@@ -408,6 +408,7 @@ execution. Biggest score movement first:
 | ✅ **DONE: crawl-hygiene fixes 1–4** — faceted-URL canonical + robots disallow, `/collections/all` + Master Collection `noindex`, 301 on duplicate 3M 6002 review (re-crawl confirmed landing 2026-06-12) | Crawlability **D→C+** | §3, §4.1 |
 | 📝 **READY: comparison-URL consolidation drafts** — 8 paste-ready guide drafts + Shopify redirect list at `fixes/wcsafety-com/blogs/guides/` | Crawlability **C→B**, E-E-A-T **C+→B−** | §2.1 |
 | 📝 **READY: on-page polish checklist** — title fixes, slug 301, methodology-callout Liquid snippet at `fixes/wcsafety-com/on-page-polish.md` and `theme/snippets/research-methodology-callout.liquid` | On-Page **C+→B−**, E-E-A-T **C+→B** | §2.2–2.3 |
+| 📝 **READY: collection rationalization plan** — 3 merges + 1 rename for the non-comparison overlapping collections at `fixes/wcsafety-com/collection-rationalization.md`. Pre-check-gated on SKU count + GSC traffic. Closes the last structural crawl issue. | Crawlability **C+→B−** | §2.1 |
 | **Verify in GSC:** product canonical resolves to `/products/<slug>`; review redirect is a 301 (not 302); watch the "Duplicate / Crawled–not-indexed" buckets clear | locks in Crawlability **C+→B** | §9 |
 | Name a real reviewer (single biggest E-E-A-T lever with zero honesty tradeoff); reconcile the return-policy "Affiliate Marketer" language with the distributor positioning on About | Trust + E-E-A-T | §5.2–5.3 |
 | Run PageSpeed + read robots/sitemap/JSON-LD on-site | Unlocks the 2 unscored categories | §6, §8, §9 |

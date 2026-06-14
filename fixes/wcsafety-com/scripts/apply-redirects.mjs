@@ -51,6 +51,22 @@ const REDIRECTS = [
   // belt-and-braces backup).
   // ['/products/mcr-safety-glasses-bearkat-bkh20-clear-polycarbonate-lenses-uv-light-protective-eyewear-with-scratch-resistant-duramass-technology-bifocal-safety-glasses-2-0-diopter',
   //  '/products/mcr-bearkat-bkh20-bifocal-safety-glasses',         true],
+
+  // Collection rationalization (see fixes/wcsafety-com/collection-rationalization.md).
+  // ALL three require operator pre-checks BEFORE uncommenting:
+  //   1. SKU count on the source collection (< 3 = strong merge case)
+  //   2. GSC clicks on the source URL (> 50/month = keep, don't merge)
+  //   3. Brand/series tags added to relevant products so the destination
+  //      collection's filters still expose the merged scope as a facet
+  // Destinations all exist, so destinationLive: true — but the script
+  // won't ship them while commented out.
+  //
+  // ['/collections/howard-leight-cordless-ear-plugs',
+  //  '/collections/hearing-protection',                            true],
+  // ['/collections/3m-6500-series-half-mask-respirators',
+  //  '/collections/3m-half-mask-respirators',                      true],
+  // ['/collections/msa-full-face-mask-respirator',
+  //  '/collections/full-face-mask-respirators',                    true],
 ];
 
 const includePending = process.argv.includes('--include-pending');

@@ -194,7 +194,7 @@ Out of scope for this run — left for a follow-up session:
 | Item | Why deferred |
 | ---- | ------------ |
 | Reconcile the Return Policy page's "Affiliate Marketer" framing with the distributor positioning on About | Copy-decision the operator should make first |
-| Rationalize the overlapping non-comparison collections (Hearing Protection vs. Howard Leight Cordless Ear Plugs, etc.) | Needs operator input on which are distinct vs. redundant |
+| Rationalize the overlapping non-comparison collections (Hearing Protection vs. Howard Leight Cordless Ear Plugs, etc.) | **Plan now available** in `collection-rationalization.md` — 3 merges + 1 rename, all pre-check-gated on SKU count + GSC traffic. Add as a Phase 7 once you've worked through Phases 1–6 here. |
 | Set a December refresh cadence for the "Best X 2026" guide cluster | Calendar reminder, not an admin task |
 | Add original product photography (the genuine first-hand Experience signal from §2.3) | Physical equipment + camera work; multi-day effort |
 | Technical / Performance (CWV, Lighthouse) and Structured Data (JSON-LD validation) | Need on-site inspection from a non-sandboxed environment |
