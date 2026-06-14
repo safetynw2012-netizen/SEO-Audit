@@ -404,11 +404,12 @@ execution. Biggest score movement first:
 | Action | Lifts category | Audit ref |
 | ------ | -------------- | --------- |
 | ✅ **DONE: trust pages indexed** — About / Contact / Affiliate Disclosure live in Google | Trust **D→B−**, E-E-A-T **C→C+** | §5.1, §9 |
-| ✅ **DONE: rogue brand suffix cleared** from live page titles | On-Page **D→C** | §4.2 |
-| ✅ **DONE: crawl-hygiene fixes 1–4** — faceted-URL canonical + robots disallow, `/collections/all` + Master Collection `noindex`, 301 on duplicate 3M 6002 review (re-crawl pending) | Crawlability **D→C+** | §3, §4.1 |
+| ✅ **DONE: rogue brand suffix cleared** from live page titles (3 of 4 batches; 3 stubborn URLs pending — see `fixes/wcsafety-com/on-page-polish.md` §1) | On-Page **D→C** | §4.2 |
+| ✅ **DONE: crawl-hygiene fixes 1–4** — faceted-URL canonical + robots disallow, `/collections/all` + Master Collection `noindex`, 301 on duplicate 3M 6002 review (re-crawl confirmed landing 2026-06-12) | Crawlability **D→C+** | §3, §4.1 |
+| 📝 **READY: comparison-URL consolidation drafts** — 8 paste-ready guide drafts + Shopify redirect list at `fixes/wcsafety-com/blogs/guides/` | Crawlability **C→B**, E-E-A-T **C+→B−** | §2.1 |
+| 📝 **READY: on-page polish checklist** — title fixes, slug 301, methodology-callout Liquid snippet at `fixes/wcsafety-com/on-page-polish.md` and `theme/snippets/research-methodology-callout.liquid` | On-Page **C+→B−**, E-E-A-T **C+→B** | §2.2–2.3 |
 | **Verify in GSC:** product canonical resolves to `/products/<slug>`; review redirect is a 301 (not 302); watch the "Duplicate / Crawled–not-indexed" buckets clear | locks in Crawlability **C+→B** | §9 |
-| Rationalize the overlapping collections (cannibalization); 301 the 190-char BearKat slug; trim over-length guide titles | Crawlability + On-Page **→B−** | §4.1–4.6 |
-| Apply the per-guide affiliate-disclosure snippet; name a real reviewer; reconcile affiliate-vs-distributor wording | Trust + FTC compliance | §5.2–5.3 |
+| Name a real reviewer (single biggest E-E-A-T lever with zero honesty tradeoff); reconcile the return-policy "Affiliate Marketer" language with the distributor positioning on About | Trust + E-E-A-T | §5.2–5.3 |
 | Run PageSpeed + read robots/sitemap/JSON-LD on-site | Unlocks the 2 unscored categories | §6, §8, §9 |
 
 The three big session wins (trust indexation + rogue-brand cleanup +
