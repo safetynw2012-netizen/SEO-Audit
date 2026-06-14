@@ -11,38 +11,49 @@
 import { gql, dryRun, log, bannerStart, bannerEnd } from './lib/shopify.mjs';
 
 const REDIRECTS = [
+  // [from, to, destinationLive]
+  //
+  // destinationLive: set to true once the destination guide is published
+  // on the live site. Redirects whose destination is NOT live are skipped
+  // by default (they would create a 301 → 404). Pass --include-pending to
+  // override (use only if you're about to publish the destination minutes
+  // later).
+  //
   // Phase 3 — comparison-URL consolidation (11 rows from blogs/guides/README.md)
   ['/products/3m-2091-vs-3m-2097',
-   '/blogs/guides/3m-2091-vs-2097-filter'],
+   '/blogs/guides/3m-2091-vs-2097-filter',                       true],
   ['/collections/3m-2091-vs-3m-2097',
-   '/blogs/guides/3m-2091-vs-2097-filter'],
+   '/blogs/guides/3m-2091-vs-2097-filter',                       true],
   ['/products/3m-60921-vs-60923',
-   '/blogs/guides/3m-60921-vs-60923-cartridge'],
+   '/blogs/guides/3m-60921-vs-60923-cartridge',                  true],   // published 2026-06-14
   ['/collections/3m-60921-vs-60923-vs-60926-respirator-cartridges',
-   '/blogs/guides/3m-60921-vs-60923-vs-60926-cartridge'],
+   '/blogs/guides/3m-60921-vs-60923-vs-60926-cartridge',         false],  // draft only
   ['/collections/3m-60921-vs-3m-60926',
-   '/blogs/guides/3m-60921-vs-60926-cartridge'],
+   '/blogs/guides/3m-60921-vs-60926-cartridge',                  false],  // draft only
   ['/collections/3m-60923-vs-3m-6001',
-   '/blogs/guides/3m-60923-vs-6001-cartridge'],
+   '/blogs/guides/3m-60923-vs-6001-cartridge',                   false],  // draft only
   ['/collections/3m-6001-vs-3m-6003',
-   '/blogs/guides/3m-6001-vs-6003-cartridge'],
+   '/blogs/guides/3m-6001-vs-6003-cartridge',                    true],   // published 2026-06-14
   ['/collections/3m-6001-vs-6003',
-   '/blogs/guides/3m-6001-vs-6003-cartridge'],
+   '/blogs/guides/3m-6001-vs-6003-cartridge',                    true],   // published 2026-06-14
   ['/collections/3m-6001-vs-3m-6006',
-   '/blogs/guides/3m-6001-vs-6006-cartridge'],
+   '/blogs/guides/3m-6001-vs-6006-cartridge',                    false],  // draft only
   ['/products/3m-2097-vs-3m-2297',
-   '/blogs/guides/3m-2097-vs-2297-filter'],
+   '/blogs/guides/3m-2097-vs-2297-filter',                       false],  // draft only
   ['/products/3m-6000-series-half-mask-respirator-vs-3m-7500',
-   '/blogs/guides/3m-6000-vs-7500-half-mask'],
+   '/blogs/guides/3m-6000-vs-7500-half-mask',                    false],  // draft only
   ['/products/n95-vs-p100-respirator',
-   '/blogs/guides/n95-vs-kn95-vs-p100-which-respirator-do-you-actually-need'],
+   '/blogs/guides/n95-vs-kn95-vs-p100-which-respirator-do-you-actually-need',
+                                                                 true],
 
   // Phase 1D — 190-char BearKat slug (uncomment after handle rename in
   // apply-seo-titles.mjs; Shopify usually auto-creates this, so this is a
   // belt-and-braces backup).
   // ['/products/mcr-safety-glasses-bearkat-bkh20-clear-polycarbonate-lenses-uv-light-protective-eyewear-with-scratch-resistant-duramass-technology-bifocal-safety-glasses-2-0-diopter',
-  //  '/products/mcr-bearkat-bkh20-bifocal-safety-glasses'],
+  //  '/products/mcr-bearkat-bkh20-bifocal-safety-glasses',         true],
 ];
+
+const includePending = process.argv.includes('--include-pending');
 
 const FIND_BY_PATH = /* GraphQL */ `
   query findUrlRedirectByPath($q: String!) {
@@ -68,12 +79,30 @@ async function findExisting(path) {
 
 async function main() {
   bannerStart('apply-redirects');
+  if (includePending) {
+    console.log(
+      'NOTE: --include-pending set — redirects whose destination is not\n' +
+      '      yet live WILL be created. They will 301 → 404 until you\n' +
+      '      publish the destination guide. Use with care.\n'
+    );
+  }
 
   let created = 0;
   let skippedExists = 0;
   let skippedConflict = 0;
+  let skippedPending = 0;
 
-  for (const [path, target] of REDIRECTS) {
+  for (const [path, target, destinationLive] of REDIRECTS) {
+    if (!destinationLive && !includePending) {
+      log(
+        `SKIP (destination not yet published): ${path}\n` +
+          `       wanted target: ${target}\n` +
+          `       publish that guide first, flip destinationLive=true, re-run.`
+      );
+      skippedPending++;
+      continue;
+    }
+
     const existing = await findExisting(path);
 
     if (existing) {
@@ -104,6 +133,7 @@ async function main() {
   console.log(`  ${created} ${dryRun ? 'would be created' : 'created'}`);
   console.log(`  ${skippedExists} already exist (target matches, no action)`);
   console.log(`  ${skippedConflict} already exist with DIFFERENT target (skipped — review manually)`);
+  console.log(`  ${skippedPending} pending (destination not yet published — use --include-pending to force)`);
 
   bannerEnd();
 }
