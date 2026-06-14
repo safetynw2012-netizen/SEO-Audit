@@ -1,0 +1,13 @@
+{
+  "name": "wcsafety-seo-scripts",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Local apply scripts for fixes/wcsafety-com/. Run with node 20+. Token from env only.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "marked": "^14.1.3"
+  }
+}

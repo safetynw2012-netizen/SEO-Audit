@@ -22,16 +22,13 @@ committed file.** The scripts read it from your shell environment.
 | File | What it does |
 | ---- | ------------ |
 | `lib/shopify.mjs` | Auth + GraphQL helper. Reads env vars, throws on missing. Includes `dryRun` flag (default true) and call counter. |
-| `apply-redirects.mjs` | Creates the 12 URL redirects from EXECUTE.md Phase 3. Idempotent — skips redirects whose source path already exists. |
+| `apply-redirects.mjs` | Creates the 12 comparison-URL redirects from EXECUTE.md Phase 3, plus the 3 commented-out collection merges from `collection-rationalization.md`. Idempotent. Gated on `destinationLive` per row. |
 | `apply-seo-titles.mjs` | Updates SEO titles + meta descriptions on products, collections, and blog articles per EXECUTE.md Phase 1A/1B/1C. Includes a commented-out Phase 1D BearKat handle rename. |
+| `publish-guides.mjs` | Auto-publishes comparison-guide drafts from `../blogs/guides/*.md`. **Three-level safety gating** — dry-run / create-as-draft / publish-live. Hard refuses to publish any draft with unresolved `[VERIFY]`-style placeholders. Requires `npm install` (for `marked`). |
+| `package.json` | Pins the `marked` dependency used by `publish-guides.mjs`. Zero other deps. |
 
 ## What's NOT here (yet)
 
-- `publish-guides.mjs` — creating the 8 comparison guide blog articles
-  from `blogs/guides/*.md`. Deliberately omitted because each guide needs
-  manual `[VERIFY]`-marker resolution (NIOSH TC numbers, etc.) before
-  publishing — automating that risks shipping unverified safety content.
-  Do the guides by hand.
 - `apply-theme.mjs` — uploading the methodology callout snippet via the
   Asset API. Doable but theme edits are higher-risk; recommended to do in
   admin so you can preview before saving.
@@ -77,6 +74,9 @@ would do.
 ```sh
 cd fixes/wcsafety-com/scripts/
 
+# (one-time, for publish-guides.mjs only)
+npm install
+
 # 1. Dry-run the redirects
 node apply-redirects.mjs
 
@@ -88,10 +88,50 @@ node apply-seo-titles.mjs
 
 # 4. Apply
 node apply-seo-titles.mjs --apply
+
+# 5. Dry-run the guide-publish pass
+node publish-guides.mjs
+
+# 6. Create the eligible guides as DRAFTS (operator reviews + publishes
+#    each manually in Shopify admin)
+node publish-guides.mjs --apply
+
+# 7. After review: publish-live in one pass (skip the manual click-through)
+node publish-guides.mjs --apply --publish-live
 ```
 
 Each script prints `[DRY] …` or `[APPLY] …` on every action, then a
 summary, then the total GraphQL call count.
+
+### publish-guides.mjs — safety gates explained
+
+`publish-guides.mjs` reads every `.md` file in `../blogs/guides/`, parses
+the front-matter, validates the body, and either creates the article via
+the Shopify Admin GraphQL API or refuses with a reason.
+
+| Outcome | Means |
+| ------- | ----- |
+| `CREATE (draft)` | Eligible to publish. Will be created as an unpublished draft on `--apply`. |
+| `CREATE (live)` | Eligible. Will be created and published live on `--apply --publish-live`. |
+| `REFUSE` | Has unresolved placeholders. Fill the `[VERIFY ...]`, `[REVIEWER NAME ...]`, `[DATE]`, `[AMAZON LINK ...]`, `[PRODUCT URL ...]` etc. in the `.md` file. |
+| `INVALID` | Missing required front-matter (`Page handle`, `SEO title`, `Meta description`, `Author byline`) or body content. |
+| `SKIP (already exists)` | Article already published at that handle — idempotent, no action. |
+
+**The hard refusal on placeholders is intentional and not configurable** —
+for safety content, automating the publication of unverified NIOSH TC
+numbers would be worse than not automating at all.
+
+Before running, add the two article metafield definitions in Shopify
+admin (Settings → Custom data → Articles → Add definition):
+
+| Namespace | Key | Type |
+| --------- | --- | ---- |
+| `editorial` | `reviewer` | Single line text |
+| `editorial` | `last_reviewed` | Date |
+
+If those don't exist the article still creates, but the metafield writes
+will fail and the methodology-callout Liquid snippet will fall back to
+its defaults ("WC Safety Editorial Team" + `article.published_at`).
 
 ## After running
 
