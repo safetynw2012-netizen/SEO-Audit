@@ -33,21 +33,25 @@ invent test data or fit-factor numbers.
 5. **Confirm `curl -I` on each old URL shows `HTTP/2 301`** — a `302` won't consolidate signals.
 6. **Watch GSC → Pages → "Duplicate without user-selected canonical"** drop over 2–4 weeks.
 
-## The 8 guides — at a glance
+## The 9 guides — at a glance
 
-| # | File | Canonical URL after publish |
-| - | ---- | --------------------------- |
-| 1 | `3m-60921-vs-60923-cartridge.md` | `/blogs/guides/3m-60921-vs-60923-cartridge` |
-| 2 | `3m-60921-vs-60923-vs-60926-cartridge.md` | `/blogs/guides/3m-60921-vs-60923-vs-60926-cartridge` |
-| 3 | `3m-60921-vs-60926-cartridge.md` | `/blogs/guides/3m-60921-vs-60926-cartridge` |
-| 4 | `3m-60923-vs-6001-cartridge.md` | `/blogs/guides/3m-60923-vs-6001-cartridge` |
-| 5 | `3m-6001-vs-6003-cartridge.md` | `/blogs/guides/3m-6001-vs-6003-cartridge` |
-| 6 | `3m-6001-vs-6006-cartridge.md` | `/blogs/guides/3m-6001-vs-6006-cartridge` |
-| 7 | `3m-2097-vs-2297-filter.md` | `/blogs/guides/3m-2097-vs-2297-filter` |
-| 8 | `3m-6000-vs-7500-half-mask.md` | `/blogs/guides/3m-6000-vs-7500-half-mask` |
+| # | File | Canonical URL after publish | Status |
+| - | ---- | --------------------------- | ------ |
+| 1 | `3m-60921-vs-60923-cartridge.md` | `/blogs/guides/3m-60921-vs-60923-cartridge` | ✅ published 2026-06-14 |
+| 2 | `3m-60921-vs-60923-vs-60926-cartridge.md` | `/blogs/guides/3m-60921-vs-60923-vs-60926-cartridge` | draft |
+| 3 | `3m-60921-vs-60926-cartridge.md` | `/blogs/guides/3m-60921-vs-60926-cartridge` | draft |
+| 4 | `3m-60923-vs-6001-cartridge.md` | `/blogs/guides/3m-60923-vs-6001-cartridge` | draft |
+| 5 | `3m-6001-vs-6003-cartridge.md` | `/blogs/guides/3m-6001-vs-6003-cartridge` | ✅ published 2026-06-14 |
+| 6 | `3m-6001-vs-6006-cartridge.md` | `/blogs/guides/3m-6001-vs-6006-cartridge` | draft |
+| 7 | `3m-2097-vs-2297-filter.md` | `/blogs/guides/3m-2097-vs-2297-filter` | draft |
+| 8 | `3m-6000-vs-7500-half-mask.md` | `/blogs/guides/3m-6000-vs-7500-half-mask` | draft |
+| 9 | `3m-6000-vs-6500-half-mask.md` | `/blogs/guides/3m-6000-vs-6500-half-mask` | draft (added 2026-06-14) |
 
-*(Correction to the prior consolidation plan: it listed 7 new guides; the
-correct count is 8. The math in the impact estimate is unchanged.)*
+*(The earlier count of 7 was a miscount; corrected to 8 with the
+publication of the 6000 vs 7500 family, and now extended to 9 to round out
+the half-mask family with 6000 vs 6500. Together with the operator's
+already-live `/blogs/guides/3m-6500-vs-7500-respirator`, the three pairs in
+the 6000/6500/7500 half-mask family are now all covered.)*
 
 ## Paste-ready URL redirect list (11 redirects)
 
