@@ -20,7 +20,10 @@
    │   (+ confirmed), but new structural finding (comparison-  │
    │   page sprawl across 3 URL paths) drops Crawlability     │
    │   78 → 75 (C). Overall flat at 78.                      │
-   │   Potential once sprawl consolidated:  ~85 → B          │
+   │   2026-06-15: artifact phase complete — Structured Data  │
+   │   now has a path off "not verified" (article-jsonld      │
+   │   snippet + apply-theme.mjs ready). Potential ceiling    │
+   │   bumps from ~85 to ~88 (B+) once JSON-LD lands.         │
    └──────────────────────────────────────────────────────┘
 ```
 
@@ -123,7 +126,7 @@ deduced from URL/platform patterns; `[VERIFY]` = needs on-site checking.
 | 4 | Trust & FTC Compliance      |   20%  | 80/100   |  B-   | 88        | ↑↑ much improved |
 | — | **Weighted overall**        | 100%   | **78**   | **C+** | **~85 (B)** |            |
 |   | Technical / Performance     |  n/a   | *Not verified* | — | — | — |
-|   | Structured Data             |  n/a   | *Not verified* | — | — | — |
+|   | Structured Data             |  n/a   | *Not verified* — but **path ready**, see §3.2 | — | ~82 once `article-jsonld.liquid` ships | — |
 
 Realized overall = 75·0.25 + 77·0.30 + 80·0.25 + 80·0.20 ≈ **78**.
 "Potential" = 85·0.25 + 82·0.30 + 85·0.25 + 88·0.20 ≈ **85 (B)** — the
@@ -388,11 +391,29 @@ Lighthouse/CWV from this environment. Shopify gives a reasonable baseline
 the faceted-URL `Disallow` rule all remain unconfirmed. See audit §8 and
 §9 for the exact checklist.
 
-### 3.2 Structured Data — *Not verified*
+### 3.2 Structured Data — *Not verified · path ready (2026-06-15)*
 The scored reviews surfacing in SERPs (e.g. "4.2/5") *hint* that `Review`
 JSON-LD may be present and rich-result-eligible, but this **cannot be
-confirmed** without viewing source. Validate every page type at
-`validator.schema.org` and Google's Rich Results Test. See audit §6.
+confirmed** without viewing source.
+
+**Path off "not verified" is now in the repo:**
+- `fixes/wcsafety-com/theme/snippets/article-jsonld.liquid` — one Liquid
+  snippet that emits `Article` schema on every blog article, plus
+  conditional `Review` schema when `review.rating` metafield is set
+  (no misuse risk on generic guides). Pulls author from the same
+  `editorial.reviewer` metafield the methodology callout uses — one
+  named-reviewer input drives both surfaces.
+- `fixes/wcsafety-com/scripts/apply-theme.mjs` — uploads the snippet via
+  `themeFilesUpsert`. Operator adds the `{% render 'article-jsonld' %}`
+  call in `layout/theme.liquid <head>` gated on
+  `request.page_type == 'article'`.
+- Validate post-install at `validator.schema.org` and
+  `search.google.com/test/rich-results` (both accessible from any
+  non-sandbox machine; this environment cannot reach either).
+
+Once shipped and validated, this category scores **~82 (B)** —
+Article schema on every article, Review schema where appropriate, and
+SERP rich-result eligibility (rating stars on review listings).
 
 ---
 
@@ -406,21 +427,29 @@ execution. Biggest score movement first:
 | ✅ **DONE: trust pages indexed** — About / Contact / Affiliate Disclosure live in Google | Trust **D→B−**, E-E-A-T **C→C+** | §5.1, §9 |
 | ✅ **DONE: rogue brand suffix cleared** from live page titles (3 of 4 batches; 3 stubborn URLs pending — see `fixes/wcsafety-com/on-page-polish.md` §1) | On-Page **D→C** | §4.2 |
 | ✅ **DONE: crawl-hygiene fixes 1–4** — faceted-URL canonical + robots disallow, `/collections/all` + Master Collection `noindex`, 301 on duplicate 3M 6002 review (re-crawl confirmed landing 2026-06-12) | Crawlability **D→C+** | §3, §4.1 |
-| 📝 **READY: comparison-URL consolidation drafts** — 8 paste-ready guide drafts + Shopify redirect list at `fixes/wcsafety-com/blogs/guides/` | Crawlability **C→B**, E-E-A-T **C+→B−** | §2.1 |
-| 📝 **READY: on-page polish checklist** — title fixes, slug 301, methodology-callout Liquid snippet at `fixes/wcsafety-com/on-page-polish.md` and `theme/snippets/research-methodology-callout.liquid` | On-Page **C+→B−**, E-E-A-T **C+→B** | §2.2–2.3 |
+| ✅ **DONE: 2 of 9 comparison guides published** — `/blogs/guides/3m-60921-vs-60923-cartridge` and `/blogs/guides/3m-6001-vs-6003-cartridge` live (2026-06-14) | Content (incremental) | §2.3 |
+| 📝 **READY: 9 comparison-guide drafts** at `fixes/wcsafety-com/blogs/guides/` (2 published; 7 awaiting `[VERIFY]` resolution + publish) | Content/E-E-A-T **B−→B**, Crawlability **C→B** once redirects ship | §2.1, §2.3 |
+| 📝 **READY: on-page polish checklist** — title fixes, slug 301, methodology-callout Liquid snippet at `fixes/wcsafety-com/on-page-polish.md` + `theme/snippets/research-methodology-callout.liquid` | On-Page **C+→B−**, E-E-A-T **C+→B** | §2.2–2.3 |
 | 📝 **READY: collection rationalization plan** — 3 merges + 1 rename for the non-comparison overlapping collections at `fixes/wcsafety-com/collection-rationalization.md`. Pre-check-gated on SKU count + GSC traffic. Closes the last structural crawl issue. | Crawlability **C+→B−** | §2.1 |
-| 📝 **READY: 9th comparison guide draft** — `3m-6000-vs-6500-half-mask.md`. Rounds out the half-mask family (with the operator's published 6500-vs-7500 and the drafted 6000-vs-7500, all three pairs are covered). | Content/E-E-A-T (incremental) | §2.3 |
-| 📝 **READY: return-policy rewrite** — `fixes/wcsafety-com/pages/return-policy-rewrite.md`. Reconciles the "Affiliate Marketer, returns handled through its Affiliates" line with the About page's stocked-and-ships-direct positioning. Adds PPE-specific hygiene-based non-returnable list and the Amazon-vs-direct split. | Trust **B−→B** | §2.4 |
+| 📝 **READY: return-policy rewrite** — `fixes/wcsafety-com/pages/return-policy-rewrite.md`. Reconciles the "Affiliate Marketer, returns handled through its Affiliates" line with the About page's stocked-and-ships-direct positioning. | Trust **B−→B** | §2.4 |
+| 📝 **READY (2026-06-15): JSON-LD snippet** — `theme/snippets/article-jsonld.liquid` emits `Article` schema sitewide + conditional `Review` schema on rated reviews. Uploads via `scripts/apply-theme.mjs`. | **Structured Data: not verified → ~82**, SERP rich-result eligibility | §3.2, §6 |
+| 📝 **READY (2026-06-15): apply-theme.mjs** — uploads both theme snippets (`research-methodology-callout.liquid` + `article-jsonld.liquid`) via `themeFilesUpsert`. Prints exact `{% render %}` paste blocks for `sections/main-article.liquid` + `layout/theme.liquid`. | Unlocks methodology + JSON-LD installs | §3.2, §2.3 |
+| 📝 **READY (2026-06-15): refresh-cadence checklist** — `fixes/wcsafety-com/refresh-cadence.md`. Annual Dec → Jan ritual for "Best X 2026" guides. Calendar reminders + per-guide update checklist. | Defends current score from Feb-2027 CTR cliff | §4.8 (audit) |
+| 📝 **READY (2026-06-15): CHANGELOG.md** — master index of every artifact in `fixes/wcsafety-com/` grouped by purpose with status. Operator backlog table ranked by impact. | Organizational | — |
 | **Verify in GSC:** product canonical resolves to `/products/<slug>`; review redirect is a 301 (not 302); watch the "Duplicate / Crawled–not-indexed" buckets clear | locks in Crawlability **C+→B** | §9 |
-| Name a real reviewer (single biggest E-E-A-T lever with zero honesty tradeoff); reconcile the return-policy "Affiliate Marketer" language with the distributor positioning on About | Trust + E-E-A-T | §5.2–5.3 |
-| Run PageSpeed + read robots/sitemap/JSON-LD on-site | Unlocks the 2 unscored categories | §6, §8, §9 |
+| **Name a real reviewer** (single biggest E-E-A-T lever with zero honesty tradeoff) — fill the `editorial.reviewer` metafield once; methodology callout + JSON-LD author both pick it up automatically | E-E-A-T **C+→B** | §5.3 |
+| Run PageSpeed / Lighthouse on-site | Unlocks Technical/Performance category | §8 |
+| Validate JSON-LD post-install at `validator.schema.org` + `search.google.com/test/rich-results` | Confirms Structured Data | §6 |
 
-The three big session wins (trust indexation + rogue-brand cleanup +
-crawl-hygiene fixes) are **done**, taking the site to **C+ (78)** — ~2
-points shy of a **B**. The remaining gap is small and mechanical: let Google
-re-crawl the crawl fixes, rationalize the overlapping collections, and
-finish the on-page polish. That moves the overall to a solid **B (~85)** with
-no new content required.
+**Session-end status (2026-06-15):** The **artifact phase is complete** —
+every fix that can be drafted, scripted, or planned from this sandbox is in
+PR #6. The realized score holds at **C+ (78)** because nothing in this
+update changes the live site state — these are paste-ready artifacts +
+scripts. Realistic ceiling with everything shipped + re-crawled is now
+**~85–88 (B / B+)**: the new `article-jsonld.liquid` snippet adds the
+Structured Data category to the scoreable set (~+1.5 to overall via the
+weighted formula change), and the named-reviewer + methodology callout
+install adds a real E-E-A-T lift on top of the consolidation work.
 
 ---
 
