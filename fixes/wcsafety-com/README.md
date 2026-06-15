@@ -13,6 +13,20 @@ specific P0 finding from the audit.
 | `pages/affiliate-disclosure.md`                   | 5.1, 5.2      | Online Store → Pages → Add page → handle `affiliate-disclosure` → paste body, then add footer link             |
 | `pages/editorial-methodology.md`                  | 5.3           | Online Store → Pages → Add page → handle `editorial-methodology` → paste body                                  |
 
+## Google Merchant Center remediation
+
+A separate disapproval — *"Website needs improvement / Provide a useful
+and transparent shopping experience"* limiting visibility of all US
+products — is handled in its own report and artifact set:
+
+- Report: `audits/wcsafety-com-merchant-center-2026-06-15.md`
+- Artifacts: `fixes/wcsafety-com/merchant-center/` (`README.md`,
+  `broken-links-and-domain.md`, `placeholder-scan.md`,
+  `product-page-requirements.md`)
+
+Start with §1 of that report — the affiliate-vs-seller root-cause
+decision determines whether the rest applies.
+
 ## What still needs to be done outside this repo
 
 These were called out in the audit but cannot be solved with files alone:
