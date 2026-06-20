@@ -1,11 +1,13 @@
 # wcsafety.com — Shopify fix artifacts
 
-Companion to `audits/wcsafety-com-2026-05-15.md`. Each file in this
-directory is ready to paste into the Shopify admin to address a
-specific P0 finding from the audit.
+Companion to `audits/wcsafety-com-2026-05-15.md` (site-level) and
+`audits/wcsafety-com-products-2026-06-20.md` (product-level). Each file
+in this directory is ready to paste into / import to the Shopify admin
+to address a specific finding from the audits.
 
 | File                                              | Audit section | Where it goes in Shopify                                                                                       |
 | ------------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------- |
+| `products/optimized-titles.csv`                   | products 3/5  | Reference for the Shopify product Title, SEO title, meta description, Brand (vendor) and Barcode/GTIN fields; or use as a base for a Matrixify product import |
 | `theme/robots.txt.liquid`                         | 4.1, 3.1      | Online Store → Themes → Edit code → Templates → Add a new template → "robots" / "liquid" → paste contents      |
 | `theme/snippets/affiliate-disclosure.liquid`      | 5.2           | Online Store → Themes → Edit code → Snippets → Add new → name `affiliate-disclosure` → paste contents          |
 | `pages/about.md`                                  | 5.1           | Online Store → Pages → Add page → handle `about` → paste body                                                  |
