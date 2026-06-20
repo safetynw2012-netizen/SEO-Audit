@@ -2,310 +2,333 @@
 
 - **Site:** https://wcsafety.com/
 - **Audit date:** 2026-06-20
+- **Revision:** **2 (live-validated)** — supersedes Rev 1. See §0.
 - **Auditor:** Claude Code (automated)
 - **Scope:** Per-product (catalog) SEO — complements the site-level
   audit in `audits/wcsafety-com-2026-05-15.md`.
-- **Primary data source:** Google Merchant Center product feed exported
-  from the owner's Google Drive ("Google Merchant Center feed - Test"),
-  covering **45 SKUs** in the Respirators + Respirator-Accessories lines
-  (3M and North/Honeywell brands).
+- **Data sources:**
+  1. Google Merchant Center product feed exported from the owner's
+     Google Drive ("Google Merchant Center feed - Test"), 45 SKUs.
+  2. **Live wcsafety.com pages as indexed by Google (June 2026)** —
+     real current product `<title>` tags, URL handles, and SERP
+     snippets, gathered via search-index lookups.
 
 ---
 
-## 0. Data-source & methodology caveats (read first)
+## 0. What changed in Revision 2 (read first)
 
-This audit is grounded in a **real product feed**, not guesswork — but
-two limitations must be stated up front:
+Revision 1 of this audit was built **only** on the exported Merchant
+Center feed, which turned out to be **stale** — it described an older
+version of the catalog (and pointed at the legacy `safetynw.com`
+domain). Several Rev-1 findings recommended fixes that **the live
+`wcsafety.com` store has already implemented.** Revision 2 cross-checks
+every Rev-1 claim against the live, indexed site and corrects the record.
 
-1. **Feed is stale and points at a different domain.** The exported feed
-   uses `link` URLs on `https://www.safetynw.com/product/<id>/<slug>`
-   (the owner's older site), not the current Shopify store at
-   `wcsafety.com`. The product *data* (titles, descriptions, prices,
-   images, GTIN/MPN/brand fields, categories) is the catalog under
-   review; the *URLs* are historical. Where this audit recommends a
-   change, apply it to the live Shopify product records.
-2. **Live catalog could not be read directly.** The Shopify Admin API
-   connection's token is expired (needs re-authorization), the Ahrefs
-   API plan only exposes the free Domain Rating endpoint, and the
-   sandbox network policy blocks direct requests to `wcsafety.com`. So
-   this audit could not diff the feed against the *current* live product
-   records. Re-authorize Shopify to let a follow-up pass confirm which
-   of these SKUs are still live and read their current Shopify SEO
-   fields (`<title>`, meta description, handle).
+**Net effect of the correction:**
 
-Despite the caveats, every finding below is a concrete, fixable
-data-quality or on-page issue visible in the actual catalog data, and
-the recommended rewrites apply regardless of which domain hosts them.
+| Rev-1 finding | Rev-1 severity | Live reality (Rev 2) |
+|---------------|----------------|----------------------|
+| "Thin titles" (`3M 6200 Respirator`) | P1 | **Obsolete.** Live titles are keyword-rich; the *new* problem is the opposite — several are **too long and truncate** in Google. (§5) |
+| "Consolidate size variants into one product" | P1 | **Largely done** for the 3M 6000 series. But it created a **new canonical/cannibalization risk** with leftover single-size pages. (§4) |
+| "Empty GTIN on every SKU" | P0 | **Cannot confirm from live HTML; needs Shopify/feed access.** Still the highest-value item *if* still true. (§3) |
+| "`brand` = model, not manufacturer" | P0 | **Feed-only; cannot confirm against live store.** Verify in Shopify. (§3) |
+| Guide/link-earning content "future work" | — | **Already exists** — multiple published buyer guides. Reframed as an asset to leverage, not a gap. (§7) |
 
-**Context metric:** wcsafety.com Domain Rating = **1.4** (Ahrefs, free
-endpoint, 2026-06-20) — effectively no link authority yet. The
-practical implication for product SEO: you will **not** out-rank
-Walmart/3M/Staples/Grainger on head terms like "3M 6200 respirator" in
-the near term. The winnable strategy is (a) long-tail, intent-rich
-product titles and descriptions, (b) Google Shopping / free listings
-eligibility (which depends on feed quality, not Domain Rating), and
-(c) bundling products into guide content that earns links. This audit
-targets (a) and (b) directly.
+**Honest limits of Rev 2.** The live store sits behind bot protection
+(direct page fetches return HTTP 403) and the Shopify Admin API token is
+expired, so this revision reads the live site **through Google's index**
+(titles, handles, snippets) rather than raw HTML. That is enough to
+verify titles, URL structure, page existence, and cannibalization, but
+**not** enough to read `gtin`, the `brand` feed field, meta-description
+tags, or JSON-LD. Those items (§3, §5.2) are flagged "verify in Shopify"
+rather than asserted. The Ahrefs plan on this account exposes only the
+free Domain Rating endpoint, so search-volume figures are not included.
 
 ---
 
-## 1. Executive summary
+## 1. Executive summary (Rev 2)
 
-The respirator catalog has **good NIOSH-grade source descriptions** but
-five systemic SEO defects that suppress both organic and Shopping
-visibility. In priority order:
+The live catalog is **materially healthier** than the stale feed implied.
+Titles, variant consolidation, collection structure, and supporting guide
+content are already strong. The remaining, genuinely-open issues are:
 
-| # | Finding | Severity | SKUs affected |
-|---|---------|----------|---------------|
-| 1 | **`gtin` is empty on every SKU** — kills Google Shopping / free-listing eligibility for products that *have* manufacturer GTINs | **P0** | 45 / 45 |
-| 2 | **`brand` field holds the model number** (e.g. brand = "3M 6100"), not the manufacturer — breaks Shopping brand matching | **P0** | 45 / 45 |
-| 3 | **Duplicate descriptions & images across size variants** — classic duplicate-content + thin-page trap; these should be variants of one product, not separate SKUs | **P1** | ~30 / 45 |
-| 4 | **Thin, keyword-poor titles** ("3M 6200 Respirator" vs. competitors' "3M 6200 Half Facepiece Reusable Respirator, Medium, NIOSH") | **P1** | 45 / 45 |
-| 5 | **Data-entry errors** — wrong sizes in titles, a typo SKU in a description, and swapped product URLs | **P2** | 5 SKUs (listed in §6) |
+| # | Finding | Severity | Confidence |
+|---|---------|----------|------------|
+| 1 | **Overlong product titles truncating in SERPs** (e.g. 3M 60927, 3M 6200-Medium) — high-intent words pushed past the ~60-char cutoff | **P1** | **High** (seen live in index) |
+| 2 | **Canonical / keyword cannibalization** — a consolidated `3m-6000-series-...-6100-6200-6300` page **and** a standalone `3m-6200-half-mask-respirator-medium` page both exist and target overlapping queries | **P1** | **High** (both URLs indexed) |
+| 3 | **Comparison content published under `/products/`** (`3m-60921-vs-60923`, `3m-6000-series-...-vs-3m-7500`) — risks thin/duplicate *product* entries and Shopping-feed pollution if they are real product records | **P2** | **Medium** (URL path seen; record type unverified) |
+| 4 | **Empty `gtin`** on branded SKUs — kills Shopping / free-listing eligibility | **P0 *if still true*** | **Unverified** — check Shopify Barcode field |
+| 5 | **`brand` field holds the model** instead of `3M`/`Honeywell` | **P0 *if still true*** | **Unverified** — check Shopify/feed |
+| 6 | **Feed data-entry errors** (sizes, typos, swapped URLs) from Rev 1 §6 | **P2 *if still true*** | **Partly stale** — spot-verify against live |
 
-Fixing #1 and #2 is mostly a feed/field remap and can be done in an
-afternoon; it is the single highest-ROI action because it unlocks paid
-*and* free Shopping listings, which do not depend on the site's
-(currently near-zero) Domain Rating.
+The single highest-ROI *confirmed* action is **#1 (title length)** — a
+fast, on-page win that improves CTR on pages that already rank. **#4/#5**
+remain potentially higher-impact but **must be verified in Shopify
+first** before spending effort, because the feed that flagged them is
+stale.
 
 ---
 
 ## 2. The catalog under review
 
-45 SKUs across three product families:
+45 SKUs across three families (from the feed; live store may carry more):
 
-- **Half-mask reusable respirators (12):** 3M 6100/6200/6300,
+- **Half-mask reusable respirators:** 3M 6100/6200/6300,
   3M 7501/7502/7503, North 770030 S/M/L, North 550030 S/M/L.
-- **Full-face reusable respirators (10):** 3M 6700/6800/6900,
-  3M 7800 S/M/L, North 760008A, North 760008AS, North 54001,
-  North 54001S.
-- **Cartridges & filters (23):** 3M 6001–6009 series, 3M 2071/2078/
-  2091/2096/2097/2291/2296/2297 particulate filters, 3M 60921–60929
-  cartridge series.
+- **Full-face reusable respirators:** 3M 6700/6800/6900,
+  3M 7800 S/M/L, North 760008A, North 760008AS, North 54001/54001S.
+- **Cartridges & filters:** 3M 6001–6009, 3M 2071/2078/2091/2096/2097/
+  2291/2296/2297 particulate filters, 3M 60921–60929 cartridges.
 
-Google product category is correctly set for all
+Google product category is correctly set across the feed
 (`Business & Industrial > Work Safety Protective Gear > Gas Masks &
-Respirators` and `... > Gas Mask & Respirator Accessories`).
+Respirators` and the matching accessories taxonomy).
+
+**Live-verified product URLs** (sample confirmed in Google's index):
+
+- `…/products/3m-6000-series-half-mask-respirator-6100-6200-6300`
+- `…/products/3m-6200-half-mask-respirator-medium`
+- `…/products/3m-7502-half-mask-respirator-medium`
+- `…/products/3m-6001-organic-vapor-respirator-cartridge`
+- `…/products/3m-6002-acid-gas-respirator-cartridge`
+- `…/products/3m-60921-p100-organic-vapor-respirator-cartridge`
+- `…/products/3m-60923-p100-acid-gas-organic-vapor-respirator-cartridge`
+- `…/products/3m-60926-p100-multi-gas-and-vapor-respirator-cartridge`
+- `…/products/3m-60927-p100-mercury-vapor-organic-vapor-acid-gas-respirator-cartridge`
+- `…/products/3m-2096-p100-respirator-filter-nuisance-acid-gas`
+- `…/products/3m-5n11-n95-pre-filter`
+- `…/products/3m-60921-vs-60923` *(comparison — see §6)*
+- `…/products/3m-6000-series-half-mask-respirator-vs-3m-7500` *(comparison)*
 
 ---
 
-## 3. P0 — Google Shopping feed defects
+## 3. P0 (UNVERIFIED) — Google Shopping feed fields
 
-### 3.1 Empty GTIN on every product `priority: P0`
+> **Status change in Rev 2:** these were asserted as confirmed P0s in
+> Rev 1 based on the feed. The feed is stale, and feed fields (`gtin`,
+> `brand`) are **not visible in live page HTML**, so they are now
+> **"verify before acting."** Do this first; it is a 10-minute check in
+> Shopify and decides whether this whole section is still relevant.
 
-Every row's `gtin` column is blank. For branded products that carry a
-manufacturer GTIN/UPC (all 3M and Honeywell/North respirators do),
-Google strongly favors — and for some categories effectively requires —
-a valid `gtin` for:
+### 3.1 Confirm `gtin` (variant Barcode) is populated `priority: verify → P0`
 
-- Standard Shopping ads eligibility and competitive ranking,
-- **Free** "Shopping / Popular products" organic listings,
-- Product-grid rich results in regular Search.
+For branded products that carry a manufacturer GTIN/UPC (all 3M and
+Honeywell/North respirators do), a valid `gtin` drives Standard Shopping
+eligibility, **free** "Shopping/Popular products" organic listings, and
+product-grid rich results. **Check:** Shopify → a respirator variant →
+**Barcode (ISBN, UPC, GTIN…)** field. If blank, populate from
+manufacturer UPCs (printed on 3M/Honeywell packaging); set
+`identifier_exists = no` only where a GTIN genuinely doesn't exist.
 
-Without GTINs, these products compete with one hand tied behind their
-back against every other retailer selling the identical 3M SKU.
+### 3.2 Confirm `brand` = manufacturer, not model `priority: verify → P0`
 
-**Fix:** populate the manufacturer UPC/EAN for each SKU. These are
-printed on 3M/Honeywell packaging and available in their distributor
-data sheets. In Shopify this is the variant **Barcode (ISBN, UPC, GTIN,
-etc.)** field, which Shopify maps to `g:gtin` in the Google channel
-feed. Examples to source and verify: 3M 6200 (07025/AAD), 3M 6001,
-3M 2091, etc. If a genuine GTIN truly does not exist for an item, set
-`identifier_exists = no` rather than leaving it blank.
+Google matches offers using `brand` + `gtin`/`mpn`. **Check** the Google
+channel/feed `brand` value: it must be **`3M`** or **`Honeywell`** (North
+is now Honeywell), with the model in `mpn`. If the feed already maps
+Shopify Vendor → `brand` and Vendor is set correctly, this is a non-issue.
 
-### 3.2 `brand` field contains the model, not the manufacturer `priority: P0`
+### 3.3 `product_type` should be your own taxonomy `priority: P2`
 
-Every row sets `brand` to the model number (e.g. `brand = "3M 6100"`,
-`brand = "North 770030S"`). The correct value is the manufacturer:
-**`3M`** or **`Honeywell`** (North is now Honeywell). The model belongs
-in `mpn` (which is currently *also* set to the model — that part is
-fine).
-
-Why it matters: Google uses `brand` + `gtin`/`mpn` to match your offer
-to its product catalog. A malformed brand prevents that match, again
-hurting Shopping eligibility and the "other sellers" merchant grouping.
-
-**Fix:**
-| Field | Current (wrong) | Correct |
-|-------|-----------------|---------|
-| `brand` | `3M 6100` | `3M` |
-| `brand` | `North 770030S` | `Honeywell` |
-| `mpn` | `3M 6100` | `6100` (or full `6100`) |
-
-### 3.3 `product_type` duplicates `google_product_category` `priority: P2`
-
-Both columns hold the same Google taxonomy string. `product_type` is
-meant for **your own** merchandising taxonomy and is a ranking input
-for Shopping. Use a site-specific hierarchy, e.g.
-`Respirators > Half Mask > 3M 6000 Series` or
-`Respirator Filters & Cartridges > Organic Vapor`. This also feeds
-cleaner collection structure on-site.
+If `product_type` still mirrors `google_product_category`, replace it
+with a site-specific hierarchy (e.g. `Respirators > Half Mask > 3M 6000
+Series`). The `recommended_product_type` column in
+`fixes/wcsafety-com/products/optimized-titles.csv` provides one per SKU.
 
 ---
 
-## 4. P1 — Duplicate content across size variants
+## 4. P1 (CONFIRMED) — Canonical & cannibalization after variant consolidation
 
-### 4.1 Identical descriptions on sibling SKUs `priority: P1`
+**Rev-1 recommendation (consolidate size variants) is already done for
+the flagship line** — `…/products/3m-6000-series-half-mask-respirator-
+6100-6200-6300` exists with the title *"3M 6000 Series Respirator | 6100
+6200 6300 Half Mask."* Good.
 
-These groups ship **verbatim-identical** descriptions (and in several
-cases the identical image), differing only by size:
+**The new problem:** a **standalone** single-size page also still exists
+and is indexed —
+`…/products/3m-6200-half-mask-respirator-medium`
+(*"3M 6200 Half Mask Respirator (Medium) – Reusable Facepiece for Dust,
+Paint & Chemical Protection"*) — alongside `…/3m-7502-half-mask-
+respirator-medium`. So for the 6200/Medium query, **two pages on the same
+site compete**: the consolidated series page and the standalone page.
+That splits link/ranking signals and lets Google pick the "wrong" one.
 
-| Group | SKUs | Shared description | Shared image |
-|-------|------|--------------------|--------------|
-| 3M 6000 half-mask | 6100, 6200, 6300 | yes (word-for-word) | **yes** — all use `23.jpg` |
-| 3M 7500 half-mask | 7501, 7502, 7503 | yes | **yes** — all use `119.jpg` |
-| North 7700 half-mask | 770030 S/M/L | yes | yes — all use `201.jpg` |
-| North 5500 half-mask | 550030 S/M/L | yes | yes — all use `206.jpg` |
-| 3M 6000 full-face | 6700, 6800, 6900 | yes | **yes** — all use `83.jpg` |
-| 3M 7800 full-face | 7800 S/M/L | yes | yes — all use `76.jpg` |
-| North 76xxx full-face | 760008A, 760008AS | yes | yes — all use `199.jpg` |
-| North 54001 full-face | 54001, 54001S | yes | yes — all use `198.jpg` |
+**Fix — pick one canonical model per query cluster:**
 
-**Two problems:**
-1. **Duplicate content** — search engines see ~8 sets of near-identical
-   thin pages and pick at most one to rank, wasting crawl budget and
-   diluting signals (the exact "thin product page" risk flagged in
-   §3.3 of the site-level audit).
-2. **Wrong product model** — size is a *variant axis*, not a separate
-   product. 3M 6100/6200/6300 are S/M/L of one mask.
+- **If the series page is the canonical product** (recommended; matches
+  3M's own structure): 301-redirect the standalone single-size pages
+  (`3m-6200-half-mask-respirator-medium`, etc.) into the series page with
+  the size as a variant/anchor, **or** add `rel=canonical` from the
+  single-size pages to the series page if they must stay live for ad
+  landing.
+- **If single-size pages are canonical** (e.g. each size is a distinct
+  purchasable SKU with its own price/inventory): then the "series" URL
+  should be a **collection**, not a `/products/` page, and should
+  `rel=canonical` to itself while linking out to each size.
+- **Either way:** decide deliberately and make the canonical tags agree
+  with the internal links and the sitemap. Right now the duplication is
+  implicit, not chosen.
 
-**Recommended fix (preferred):** consolidate each group into **one
-Shopify product with a Size option** (Small/Medium/Large). This:
-- collapses 3 thin pages into 1 strong page that concentrates links,
-  reviews, and ranking signals;
-- gives a clean canonical URL (e.g.
-  `/products/3m-6000-half-mask-respirator`);
-- matches how 3M and major retailers structure these listings.
-
-301-redirect the old single-size product URLs to the consolidated
-product. If, for operational/feed reasons, the SKUs must stay separate,
-then at minimum **rewrite each description uniquely** (size-specific
-fit notes, e.g. "Size Small fits most users with a narrower face
-profile") and **use a size-specific image**.
-
-### 4.2 Cartridge/filter descriptions are strong — keep, lightly enrich `priority: P3`
-
-The 6001–6009 and 60921–60929 cartridge descriptions are genuinely
-useful (application lists, PEL multiples, NIOSH context) and largely
-unique per SKU. Light enrichment only: add a one-line "Compatible with"
-list (which respirators each cartridge fits — e.g. "Fits 3M 6000, 7500,
-6500, FF-400 series") because *that* phrasing matches real buyer search
-queries ("filters for 3M 6200").
+Apply the same check to every family that was consolidated (7500 series,
+North 7700/5500, full-face 6000/7800) — verify no orphan single-size
+pages remain indexed.
 
 ---
 
-## 5. P1 — Title optimization
+## 5. P1 (CONFIRMED) — Title length, not title thinness
 
-### 5.1 Current titles are too thin to rank or convert `priority: P1`
+Rev 1 said titles were too thin. **Live titles are the opposite —
+keyword-rich, and several now exceed Google's ~60-character display
+limit and truncate.** Confirmed live examples:
 
-Feed titles follow `<Brand+Model> Respirator` (e.g. "3M 6200
-Respirator"). Compare the live competitor titles for the identical SKU:
+| Live `<title>` (as indexed) | Issue |
+|------------------------------|-------|
+| `3M 60927 P100 Mercury Vapor Organic Vapor Acid Gas Respirator Cartridg — WC Safety` | **Truncated mid-word** ("Cartridg") — the brand suffix is cut and the page looks broken in SERPs |
+| `3M 6200 Half Mask Respirator (Medium) – Reusable Facepiece for Dust, Paint & Chemical Protection` | ~95 chars — everything after "Facepiece" is dropped on desktop; the high-value modifiers never display |
+| `3M 6000 Series Respirator \| 6100 6200 6300 Half Mask — WC Safety` | Good length **and** good pattern — use as the template |
 
-> "3M 6200 Half Facepiece Reusable Respirator, Medium, Gray, NIOSH Mask"
-> — Walmart
-> "3M Half Facepiece Reusable Respirator 6200, Medium, Gray" — Staples
+### 5.1 Title formula (front-load, ≤ ~60 chars before the brand suffix) `priority: P1`
 
-The competitor pattern packs the high-intent modifiers buyers actually
-type: **half facepiece / half mask, reusable, size, NIOSH**. Yours omit
-all of them.
+`<Brand> <Model> <Type/Hazard> <key modifier> | WC Safety`
 
-**Recommended title formula (≤ ~65 chars where possible):**
-`<Brand> <Model> <Type> Respirator – <Size> | NIOSH`
+Put the words buyers type **first**; let the long descriptive tail live in
+the **meta description** and on-page H1/body, not the `<title>`. Worked
+rewrites for the confirmed offenders:
 
-Worked rewrites (full list of all 45 in
-`fixes/wcsafety-com/products/optimized-titles.csv`):
+| Page | Current (truncating) | Recommended `<title>` |
+|------|----------------------|------------------------|
+| 60927 | `3M 60927 P100 Mercury Vapor Organic Vapor Acid Gas Respirator Cartridg…` | `3M 60927 Mercury/OV/Acid Gas P100 Cartridge \| WC Safety` |
+| 6200-Med | `3M 6200 Half Mask Respirator (Medium) – Reusable Facepiece for Dust, Paint & Chemical…` | `3M 6200 Half Mask Respirator, Medium (NIOSH) \| WC Safety` |
+| 60923 | `3M 60923 P100 Acid Gas Organic Vapor Respirator Cartridge — WC Safety` | `3M 60923 OV/Acid Gas P100 Cartridge \| WC Safety` |
 
-| SKU | Current title | Recommended title |
-|-----|---------------|-------------------|
-| 3M 6100 | 3M 6100 Respirator | 3M 6100 Half Facepiece Reusable Respirator – Small (NIOSH) |
-| 3M 6200 | 3M 6200 Respirator | 3M 6200 Half Facepiece Reusable Respirator – Medium (NIOSH) |
-| 3M 6300 | 3M 6300 Respirator | 3M 6300 Half Facepiece Reusable Respirator – Large (NIOSH) |
-| 3M 6700 | 3M 6700 Full Face Respirator Small | 3M 6700 Full Facepiece Reusable Respirator – Small (NIOSH) |
-| 3M 2091 | 3M 2091 P100 Respirator Filter | 3M 2091 P100 Particulate Filter (Pair) – Fits 6000/7500 Series |
-| 3M 6001 | 3M 6001 Cartridge Organic Vapor Respirator Filter | 3M 6001 Organic Vapor Cartridge – Fits 6000/7500/FF-400 |
-| North 770030M | North 770030M Respirator Medium | Honeywell North 770030 Half Mask Respirator – Medium |
+Audit the full catalog for any `<title>` whose text before " — WC Safety"
+exceeds ~60 characters and trim using OV/acid-gas/multi-gas abbreviations
+buyers already use.
 
-If the size-consolidation in §4.1 is done, the size moves to the variant
-and the product title becomes e.g. `3M 6000 Series Half Facepiece
-Reusable Respirator (S/M/L) – NIOSH`.
+### 5.2 Meta descriptions `priority: verify → P1`
 
-### 5.2 Set Shopify SEO title + meta description per product `priority: P1`
-
-In Shopify, the product **page title** and the **search-engine listing
-meta description** are separate fields from the product name. Populate
-both for every SKU. Meta-description template (≤ ~155 chars):
-
-> "Buy the [Brand Model] [type] respirator ([size], NIOSH-approved).
-> Protects against [hazard]. Fits [compatible cartridges/filters].
-> In stock, fast shipping."
+The descriptive copy that's currently overflowing the `<title>` is
+exactly what belongs in the **meta description** (≤ ~155 chars).
+Cannot confirm current meta tags from the index; **verify in Shopify**
+(product → Search engine listing). The `recommended_meta_description`
+column in the CSV gives a per-SKU draft; treat it as a starting point and
+reconcile with whatever live copy already exists.
 
 ---
 
-## 6. P2 — Data-entry errors to correct immediately
+## 6. P2 (CONFIRMED structure / UNVERIFIED record type) — comparison pages under `/products/`
 
-These are factual errors in the catalog data that damage trust and can
-mis-sell a safety-critical product:
+Two comparison pages are published on the **product** path:
 
-1. **North 550030S** and **North 550030M** are both **titled
-   "...Respirator Large"** despite being the Small and Medium SKUs.
-   Correct to "Small" and "Medium". (Safety sizing errors are a
-   liability issue, not just SEO.)
-2. **3M 6200 description** contains the typo **"3M 62300"** ("The 3M
-   62300 Half Facepiece…"). Correct to "6200".
-3. **3M 7800-M** product link points to a slug ending
-   `...3m-7800s-l-full-facee-respirator-large` (wrong size + "facee"
-   typo); **3M 7800-L** link points to `...3m-7800s-m-...-medium`.
-   The Medium and Large URLs are **swapped** and misspelled. Fix the
-   handles and 301-redirect.
-4. **3M 7800-S description** references "3M 7800S-S" while the title is
-   "7800-S" — standardize the model string.
-5. Several North full-face titles use a non-breaking space / stray
-   character between model and "Respirator" (e.g. "760008A␠Full Face").
-   Normalize whitespace so titles render and match cleanly.
+- `…/products/3m-60921-vs-60923` — *"3M 60921 vs 60923: OV vs OV/Acid
+  Gas Compared"*
+- `…/products/3m-6000-series-half-mask-respirator-vs-3m-7500` — *"3M 6000
+  Series Half Mask Respirator vs 3M 7500"*
 
----
+This is a legitimate, smart content play (comparison intent is
+high-converting). The **risk** is only if these are real Shopify
+*product records*:
 
-## 7. Prioritized remediation roadmap
+1. They may be **submitted to the Google Merchant feed** as products with
+   no real GTIN/price/inventory → feed disapprovals or thin-offer flags.
+2. They may carry `Product` JSON-LD without a valid `Offer` → structured-
+   data warnings.
+3. They duplicate intent with the actual product and guide pages.
 
-### This week (P0 — unlocks Shopping, no authority needed)
-1. Remap `brand` → manufacturer (`3M` / `Honeywell`) on all 45 SKUs.
-2. Populate `gtin` (variant Barcode) from manufacturer UPCs; set
-   `identifier_exists=no` only where none exists.
-3. Fix the §6 data-entry errors (sizes, typos, swapped URLs).
-
-### Weeks 2–3 (P1 — organic visibility)
-4. Consolidate size-variant SKUs into single products with a Size
-   option; 301 the old URLs (§4.1).
-5. Roll out the new title formula across the catalog using
-   `fixes/.../optimized-titles.csv`.
-6. Write unique Shopify SEO title + meta description per product (§5.2).
-
-### Month 2 (P2/P3 — depth & differentiation)
-7. Replace `product_type` with a site-specific taxonomy (§3.3).
-8. Add "Compatible with…" cross-reference lines to every cartridge/
-   filter (§4.2) and cross-link cartridges ↔ the masks they fit
-   (internal-linking win from the site-level audit §7).
-9. Add `Product` + `Offer` + `AggregateRating` JSON-LD with `gtin`/
-   `mpn`/`brand` populated, so structured data matches the feed.
+**Action:** confirm whether these are products or pages/blog posts.
+- If they must stay as products, ensure they're **excluded from the
+  Google channel** (sales-channel/feed exclusion) and don't emit
+  `Offer`/price schema.
+- Cleaner: move comparison content to `/blogs/guides/` (where the site
+  already publishes — see §7) and 301 the `/products/` URLs there, or
+  keep them as **Shopify Pages**, not products.
 
 ---
 
-## Appendix A — Field-level scorecard (feed as exported)
+## 7. Existing content assets to leverage (not a gap)
 
-| Field | Status | Note |
-|-------|--------|------|
-| `id` | ✅ | model-based, unique |
-| `title` | ⚠️ | thin; missing type/size/NIOSH keywords |
-| `description` | ⚠️ | strong source text but duplicated across sizes |
-| `link` | ❌ | points to legacy safetynw.com, not wcsafety.com |
-| `condition` | ✅ | "new" |
-| `price` | ✅ | present, numeric |
-| `availability` | ✅ | "In stock" |
-| `image_link` | ⚠️ | duplicated across size siblings |
-| `gtin` | ❌ | empty on all 45 |
-| `mpn` | ✅ | model number present |
-| `brand` | ❌ | holds model, not manufacturer |
-| `google_product_category` | ✅ | correct taxonomy |
-| `product_type` | ⚠️ | duplicates google_product_category |
+Rev 1 listed "build guide content to earn links" as future work. **It
+already exists** and is indexed:
 
-Legend: ✅ good · ⚠️ needs improvement · ❌ broken/blocking.
+- `/blogs/guides/3m-filter-cartridge-guide` — 3M Filter & Cartridge Guide
+- `/blogs/guides/best-3m-respirator-cartridges` — Best 3M Cartridges
+- `/blogs/guides/3m-organic-vapor-cartridges-which-one-do-you-need`
+- `/blogs/guides/best-respirator-cartridge-for-solvents`
+- `/blogs/guides/best-respirator-for-manufacturing-workers`
+
+Plus well-titled collections: `…/collections/3m-half-mask-respirators`
+(*"3M Half Mask Respirators — 6000, 6500 & 7500 | WC Safety"*),
+`…/collections/respirator-filters-and-cartridges`,
+`…/collections/3m-respirator-filters-and-cartridges`.
+
+**Leverage it:** make sure every guide **internally links down to the
+exact product/collection pages** it discusses (e.g. the cartridge guide →
+each 600xx product), and each product links **up** to the relevant guide
+("Not sure which cartridge? See our 3M cartridge guide"). This is the
+internal-linking win from the site-level audit (§7), and it's nearly free
+because the content is already written.
+
+---
+
+## 8. Prioritized remediation roadmap (Rev 2)
+
+### First: a 10-minute verification pass (decides scope)
+1. In Shopify, open 3 respirator products and check **Barcode/GTIN**
+   (§3.1) and the Google channel **brand** value (§3.2). This confirms or
+   kills the two P0s before any work.
+2. Confirm whether the `…-vs-…` URLs are products, pages, or posts (§6).
+3. Spot-check the Rev-1 §-Appendix data-entry errors against live titles
+   (several already appear fixed — e.g. 6200 is correctly "Medium" live).
+
+### This week (confirmed, fast, on-page)
+4. Trim overlong `<title>` tags to ≤ ~60 chars, front-loading buyer terms
+   (§5.1) — start with 60927 (truncated mid-word) and the 6200-Medium page.
+5. Resolve the consolidated-vs-standalone duplication with canonicals /
+   301s (§4).
+6. Handle the `/products/` comparison pages per §6.
+
+### Weeks 2–3 (conditional on the verification pass)
+7. If GTIN/brand are actually broken, remap them (§3) — highest ROI of all
+   *if* still true.
+8. Write/verify unique meta descriptions per product (§5.2) using the CSV.
+9. Wire up guide ↔ product internal links (§7).
+
+### Month 2 (depth)
+10. Replace `product_type` with site taxonomy (§3.3, CSV column).
+11. Add `Product` + `Offer` + `AggregateRating` JSON-LD with valid
+    `gtin`/`mpn`/`brand`; ensure comparison pages don't emit `Offer`.
+
+---
+
+## Appendix A — Status of `fixes/.../optimized-titles.csv` after Rev 2
+
+The CSV was written against the **stale feed titles**. Several live titles
+have since moved **past** the CSV's recommendations (the live store is
+already richer), so the CSV is now best used selectively:
+
+- **Still useful:** `correct_brand`, `correct_mpn`,
+  `recommended_product_type`, and `recommended_meta_description` columns
+  (these don't conflict with live titles).
+- **Use with care:** `recommended_title` — for pages whose live title is
+  already strong, **don't regress them**; apply only where the live title
+  is missing modifiers OR is overlong (then prefer the shorter §5.1
+  pattern over the CSV's longer one).
+- **Reconcile before bulk import:** do not bulk-overwrite live titles with
+  the CSV. Diff first.
+
+## Appendix B — Field-level scorecard (feed as exported; ⚠ = stale)
+
+| Field | Feed status | Live note |
+|-------|-------------|-----------|
+| `title` | thin in feed | **rich live; some overlong (§5)** |
+| `description` | duplicated across sizes in feed | consolidation done for 6000 series (§4) |
+| `link` | legacy safetynw.com | **live store is wcsafety.com (confirmed)** |
+| `gtin` | empty in feed | **unverified live — check Shopify (§3.1)** |
+| `brand` | held model in feed | **unverified live — check Shopify (§3.2)** |
+| `mpn` | model present | likely fine |
+| `google_product_category` | correct | fine |
+| `product_type` | duplicated taxonomy | replace per §3.3 |
+
+Legend: status reflects the **exported feed**; "live note" reflects what
+the June-2026 search index actually shows.
+</content>
+</invoke>
