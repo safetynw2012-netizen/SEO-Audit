@@ -1,0 +1,38 @@
+{% comment %}
+  Custom robots.txt.liquid for wcsafety.com — implements P0 fix from
+  the 2026-05-15 SEO audit (section 4.1).
+
+  Where this goes in Shopify:
+    Online Store → Themes → ... → Edit code → Templates → Add a new
+    template → "robots" → "liquid" → paste this file's contents.
+
+  What it does relative to Shopify's default:
+    - Keeps every default Shopify Disallow (cart, checkout, admin,
+      orders, account, policies search, etc.).
+    - Adds:
+        Disallow: /collections/*?*
+      so Googlebot stops crawling the faceted/sort/pagination URLs
+      like /collections/all/products/<slug>?_pos=&_fid=&_ss= that
+      are currently being indexed as duplicates of /products/<slug>.
+    - Adds a Disallow for /collections/all/products/ entirely as a
+      belt-and-braces measure (the canonical URL is /products/<slug>
+      with no collection prefix).
+    - Keeps the Sitemap directive emitted by Shopify.
+{% endcomment %}
+{%- for group in robots.default_groups -%}
+  {{- group.user_agent }}
+
+  {%- for rule in group.rules -%}
+    {{ rule }}
+  {%- endfor -%}
+
+  {%- comment -%} Custom additions for wcsafety.com {%- endcomment -%}
+  {{ "Disallow: /collections/*?*" }}
+  {{ "Disallow: /collections/*/products/" }}
+  {{ "Disallow: /collections/all/products/" }}
+
+  {%- if group.sitemap != blank %}
+
+  {{ group.sitemap }}
+  {%- endif %}
+{% endfor %}
