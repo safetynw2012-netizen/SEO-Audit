@@ -215,7 +215,19 @@ reconcile with whatever live copy already exists.
 
 ---
 
-## 6. P2 (CONFIRMED structure / UNVERIFIED record type) — comparison pages under `/products/`
+## 6. P2 — comparison pages under `/products/`
+
+> **⚠️ UPDATED 2026-06-21 by real GSC data — see
+> `wcsafety-com-gsc-query-analysis-2026-06-21.md` §1.** The original
+> recommendation below ("move comparison content out of `/products/`")
+> is **withdrawn.** Search Console shows these comparison pages rank
+> **position 1–3** for high-intent "X vs Y" queries and are the site's
+> single best organic asset. **Do NOT 301 them.** Keep them where they
+> rank; the *only* action is to **exclude them from the Google Merchant
+> Center feed** (no price/`Offer`) and ensure they don't emit `Offer`
+> JSON-LD, so they can't cause feed disapprovals. The structural concern
+> below stands only as the rationale for that feed-exclusion, not for
+> moving the pages. Expand the pattern instead (GSC analysis §1).
 
 Two comparison pages are published on the **product** path:
 
