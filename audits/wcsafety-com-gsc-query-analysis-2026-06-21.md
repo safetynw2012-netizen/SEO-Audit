@@ -200,6 +200,41 @@ the demand is already being shown.
 
 ## 6. Off-topic footprint — triage for relevance/CTR/brand fit
 
+**Decision (owner, 2026-06-21): KEEP & OPTIMIZE.** The off-topic guide
+content (smoke detectors, hard hats, CO detectors, fire extinguishers) is
+an intentional traffic/link play. So the 0-click footprint is treated as
+a **CTR/relevance problem to fix**, not sprawl to prune. Action plan:
+
+1. **Kill the `() reviews` bug here first (§3).** It's polluting these
+   guide titles too and almost certainly suppressing CTR at pos 8–11.
+2. **Match the query modifiers in the `<title>` and H1.** These are
+   high-modifier queries (`under $50`, `2026`, `best`) — the title must
+   echo them. E.g. for `best smoke detector under $50` (1,574 impr,
+   pos 8.1), the page title should literally read like
+   *"Best Smoke Detectors Under $50 (2026) — Tested & Ranked"* with a
+   compelling meta description. Position 8 + 0 clicks = the snippet isn't
+   earning the click, not that the ranking is hopeless.
+3. **Win the rich results.** These "best X" SERPs are dominated by
+   listicles with review stars, FAQ, and product tables. Add valid
+   `FAQPage`/`ItemList` schema and a comparison table near the top to
+   compete for featured snippets and visual SERP space.
+4. **Make every guide convert to owned inventory.** Each guide must link
+   prominently to the products/collections you actually sell (and where a
+   category is purely affiliate, that's fine — but link it so the
+   impressions do *something*).
+5. **FTC disclosure.** "Best X 2026" review/affiliate content must carry a
+   clear, conspicuous affiliate disclosure — see the site-level audit's
+   FTC-compliance section and the ready-made
+   `fixes/wcsafety-com/pages/affiliate-disclosure.md` /
+   `theme/snippets/affiliate-disclosure.liquid`.
+6. **Re-measure in 30 days.** `best smoke detector under $50` at 1,574
+   impressions is the single largest lever in the dataset — track its CTR
+   after the title/schema fixes to confirm the optimize bet is paying off.
+
+---
+
+### Original analysis (retained for context)
+
 A large share of impressions comes from categories far from the core
 respirator catalog, almost all at **0 clicks**:
 
@@ -255,7 +290,7 @@ Fix the `() reviews` bug here too (it's polluting the Spanish queries).
 | 2 | **Don't** redirect comparison pages; exclude them from Merchant feed only (§1) | Low | They rank pos 1–3 — top organic asset |
 | 3 | Push `p95 vs p100` cluster to page 1 (§4) | Low–Med | 229+118 impr on page 2 |
 | 4 | Strengthen product pages for "3M <model>" + internal links from comparison pages (§2) | Med | Product pages stuck pos 16–40 for own SKUs |
-| 5 | Triage the smoke-detector / off-topic footprint (§6) | Med (decision) | 1,574-impr / 0-click outlier |
+| 5 | **Optimize** the off-topic guide footprint — title/meta match query modifiers, FAQ/ItemList schema, link to owned inventory, FTC disclosure (§6) | Med | 1,574-impr / 0-click outlier; owner chose keep+optimize |
 | 6 | Collection-page depth for head terms (§5) | Med (long game) | 100+ impr at pos 50–70 |
 | 7 | Spanish/`hreflang` if shipping LATAM (§7) | Med | recurring ES/PT queries |
 
