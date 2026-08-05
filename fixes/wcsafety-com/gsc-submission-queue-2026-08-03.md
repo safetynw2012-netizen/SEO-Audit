@@ -83,6 +83,38 @@ For each URL, in the order above:
 3. If it reports the indexed version is stale, click **Request indexing**.
 4. Log the date submitted in the tracking table below.
 
+### One-click inspection links
+
+Each link opens URL Inspection with the URL already loaded — click, then
+**Request indexing**. Use whichever block matches your property type (the
+GSC property switcher shows which: `sc-domain:wcsafety.com` = Domain
+property, `https://wcsafety.com/` = URL-prefix property).
+
+**Domain property**
+
+1. [product-reviews collection](https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awcsafety.com&id=https%3A%2F%2Fwcsafety.com%2Fcollections%2Fproduct-reviews)
+2. [3M 6500 series collection](https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awcsafety.com&id=https%3A%2F%2Fwcsafety.com%2Fcollections%2F3m-6500-series-half-mask-respirators)
+3. [3M 1100 foam ear plugs](https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awcsafety.com&id=https%3A%2F%2Fwcsafety.com%2Fproducts%2F3m-1100-foam-ear-plugs-cordless-nrr-29)
+4. [BRK First Alert 9120BFF](https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awcsafety.com&id=https%3A%2F%2Fwcsafety.com%2Fproducts%2Fbrk-first-alert-9120bff-smi100-ac-smoke-detector-hardwired-alarm-with-battery-backup-white-1-pack)
+5. [3M filter & cartridge guide](https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awcsafety.com&id=https%3A%2F%2Fwcsafety.com%2Fblogs%2Fguides%2F3m-filter-cartridge-guide)
+6. [Best carbon monoxide detector 2026](https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awcsafety.com&id=https%3A%2F%2Fwcsafety.com%2Fblogs%2Fguides%2Fbest-carbon-monoxide-detector-2026)
+7. [N95 vs KN95 vs P100](https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awcsafety.com&id=https%3A%2F%2Fwcsafety.com%2Fblogs%2Fguides%2Fn95-vs-kn95-vs-p100-which-respirator-do-you-actually-need)
+8. [OSHA flammable cabinet rules](https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awcsafety.com&id=https%3A%2F%2Fwcsafety.com%2Fblogs%2Freference%2Fosha-flammable-cabinet-requirements)
+9. [Kidde COBD10 review](https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awcsafety.com&id=https%3A%2F%2Fwcsafety.com%2Fblogs%2Fproduct-reviews%2Fcobd10-kidde-10-year-battery-co-alarm-digital-display-review)
+10. [MCR BearKat BKH20 — new slug](https://search.google.com/search-console/inspect?resource_id=sc-domain%3Awcsafety.com&id=https%3A%2F%2Fwcsafety.com%2Fproducts%2Fmcr-bearkat-bkh20-bifocal-safety-glasses)
+
+**URL-prefix property** — same order:
+[1](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwcsafety.com%2F&id=https%3A%2F%2Fwcsafety.com%2Fcollections%2Fproduct-reviews) ·
+[2](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwcsafety.com%2F&id=https%3A%2F%2Fwcsafety.com%2Fcollections%2F3m-6500-series-half-mask-respirators) ·
+[3](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwcsafety.com%2F&id=https%3A%2F%2Fwcsafety.com%2Fproducts%2F3m-1100-foam-ear-plugs-cordless-nrr-29) ·
+[4](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwcsafety.com%2F&id=https%3A%2F%2Fwcsafety.com%2Fproducts%2Fbrk-first-alert-9120bff-smi100-ac-smoke-detector-hardwired-alarm-with-battery-backup-white-1-pack) ·
+[5](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwcsafety.com%2F&id=https%3A%2F%2Fwcsafety.com%2Fblogs%2Fguides%2F3m-filter-cartridge-guide) ·
+[6](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwcsafety.com%2F&id=https%3A%2F%2Fwcsafety.com%2Fblogs%2Fguides%2Fbest-carbon-monoxide-detector-2026) ·
+[7](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwcsafety.com%2F&id=https%3A%2F%2Fwcsafety.com%2Fblogs%2Fguides%2Fn95-vs-kn95-vs-p100-which-respirator-do-you-actually-need) ·
+[8](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwcsafety.com%2F&id=https%3A%2F%2Fwcsafety.com%2Fblogs%2Freference%2Fosha-flammable-cabinet-requirements) ·
+[9](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwcsafety.com%2F&id=https%3A%2F%2Fwcsafety.com%2Fblogs%2Fproduct-reviews%2Fcobd10-kidde-10-year-battery-co-alarm-digital-display-review) ·
+[10](https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwcsafety.com%2F&id=https%3A%2F%2Fwcsafety.com%2Fproducts%2Fmcr-bearkat-bkh20-bifocal-safety-glasses)
+
 **Quota:** Request Indexing is capped at roughly a dozen URLs/day per
 property and the cap is shared with `EXECUTE.md` Phase 5. If you hit it,
 rows 1–4 are the priority; the rest can wait a day.
