@@ -1,23 +1,55 @@
 {% comment %}
-  Custom robots.txt.liquid for wcsafety.com — implements P0 fix from
-  the 2026-05-15 SEO audit (section 4.1).
+  Custom robots.txt.liquid for wcsafety.com
+
+  ⚠️  REVISED 2026-08-09 after an indexing incident. Read
+      `audits/incident-2026-07-robots-block.md` before editing.
+
+  The previous version of this file blocked:
+
+      Disallow: /collections/*/products/
+      Disallow: /collections/all/products/
+
+  Those two lines were deployed around 2026-07-01 and caused a
+  traffic loss. They are deliberately NOT in this file. Do not
+  re-add them.
+
+  Why they were harmful:
+    The goal was to stop /collections/<x>/products/<slug> duplicates
+    competing with the canonical /products/<slug>. But robots.txt
+    does not deduplicate — it only stops crawling. A URL Google
+    cannot crawl is a URL whose <link rel="canonical"> Google cannot
+    read. So instead of consolidating onto /products/<slug>, the
+    duplicates were stranded: Search Console reported "Indexed,
+    though blocked by robots.txt" AND "Duplicate without
+    user-selected canonical" in the same notice on 2026-07-03, then
+    "Blocked by robots.txt" on 2026-07-28, then "Duplicate, Google
+    chose different canonical than user" on 2026-08-08.
+
+    Duplicate content is a canonical-tag problem. Fix it with
+    canonicals (see `fixes/wcsafety-com/canonical-verification.md`),
+    never with robots.txt.
+
+  What this file does relative to Shopify's default:
+    - Keeps every default Shopify Disallow (cart, checkout, admin,
+      orders, account, policies search, etc.).
+    - Blocks only Shopify's filter/sort state parameters, which are
+      genuine crawl-budget waste and carry no unique content:
+      _pos, _fid, _ss, sort_by, and the filter.* family.
+    - Deliberately does NOT block ?page= pagination. Paginated
+      collection URLs are how Googlebot discovers deeper products;
+      blocking them suppresses discovery. The previous
+      `Disallow: /collections/*?*` rule caught pagination as
+      collateral damage.
+    - Deliberately does NOT block any /products/ path, under any
+      prefix. Canonicals handle those.
+    - Keeps the Sitemap directive emitted by Shopify.
 
   Where this goes in Shopify:
     Online Store → Themes → ... → Edit code → Templates → Add a new
     template → "robots" → "liquid" → paste this file's contents.
 
-  What it does relative to Shopify's default:
-    - Keeps every default Shopify Disallow (cart, checkout, admin,
-      orders, account, policies search, etc.).
-    - Adds:
-        Disallow: /collections/*?*
-      so Googlebot stops crawling the faceted/sort/pagination URLs
-      like /collections/all/products/<slug>?_pos=&_fid=&_ss= that
-      are currently being indexed as duplicates of /products/<slug>.
-    - Adds a Disallow for /collections/all/products/ entirely as a
-      belt-and-braces measure (the canonical URL is /products/<slug>
-      with no collection prefix).
-    - Keeps the Sitemap directive emitted by Shopify.
+  After deploying, verify at https://wcsafety.com/robots.txt that
+  no /collections/*/products/ rule is present.
 {% endcomment %}
 {%- for group in robots.default_groups -%}
   {{- group.user_agent }}
@@ -26,10 +58,15 @@
     {{ rule }}
   {%- endfor -%}
 
-  {%- comment -%} Custom additions for wcsafety.com {%- endcomment -%}
-  {{ "Disallow: /collections/*?*" }}
-  {{ "Disallow: /collections/*/products/" }}
-  {{ "Disallow: /collections/all/products/" }}
+  {%- comment -%}
+    Custom additions for wcsafety.com — filter/sort state only.
+    See the header comment before adding anything here.
+  {%- endcomment -%}
+  {{ "Disallow: /collections/*?*_pos=" }}
+  {{ "Disallow: /collections/*?*_fid=" }}
+  {{ "Disallow: /collections/*?*_ss=" }}
+  {{ "Disallow: /collections/*?*sort_by=" }}
+  {{ "Disallow: /collections/*?*filter." }}
 
   {%- if group.sitemap != blank %}
 
