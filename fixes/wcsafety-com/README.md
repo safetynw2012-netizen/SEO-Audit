@@ -4,9 +4,23 @@ Companion to `audits/wcsafety-com-2026-05-15.md`. Each file in this
 directory is ready to paste into the Shopify admin to address a
 specific P0 finding from the audit.
 
+> ⚠️ **Read `audits/incident-2026-07-robots-block.md` before touching
+> `theme/robots.txt.liquid`.** The version of that file deployed around
+> 2026-07-01 blocked `/collections/*/products/`, which stranded ranking
+> signals instead of consolidating them and cost organic traffic. The
+> file here has been revised; the two harmful rules are gone and must
+> not be re-added.
+>
+> **The audit's fix order is load-bearing.** §4.1 lists canonical
+> verification as step 1 and robots.txt as step 2. Step 1 (item 1 below)
+> was never done, which is what turned step 2 into an outage. Work
+> `canonical-verification.md` before deploying any crawl-blocking rule,
+> and before requesting validation in Search Console.
+
 | File                                              | Audit section | Where it goes in Shopify                                                                                       |
 | ------------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------- |
 | `theme/robots.txt.liquid`                         | 4.1, 3.1      | Online Store → Themes → Edit code → Templates → Add a new template → "robots" / "liquid" → paste contents      |
+| `canonical-verification.md`                       | 4.1 (step 1)  | Checklist — do this **before** robots.txt and before any Search Console validation request                     |
 | `theme/snippets/affiliate-disclosure.liquid`      | 5.2           | Online Store → Themes → Edit code → Snippets → Add new → name `affiliate-disclosure` → paste contents          |
 | `pages/about.md`                                  | 5.1           | Online Store → Pages → Add page → handle `about` → paste body                                                  |
 | `pages/contact.md`                                | 5.1           | Online Store → Pages → Add page → handle `contact` → paste body                                                |
@@ -17,10 +31,12 @@ specific P0 finding from the audit.
 
 These were called out in the audit but cannot be solved with files alone:
 
-1. **Canonical-tag verification (audit 4.1).** Open
-   `layout/theme.liquid` in the theme editor and confirm
-   `<link rel="canonical" href="{{ canonical_url }}">` is present
-   in `<head>` and not overridden by any installed app. Then
+1. **Canonical-tag verification (audit 4.1).** ⚠️ **Still open, and
+   now the highest priority.** Skipping this is what made the July
+   robots.txt deploy harmful. Full procedure is in
+   `canonical-verification.md`; in short, open `layout/theme.liquid`
+   and confirm `<link rel="canonical" href="{{ canonical_url }}">` is
+   present in `<head>` and not overridden by any installed app, then
    spot-check a `/collections/all/products/<slug>?_pos=...` URL in
    Search Console's URL Inspection tool and confirm Google reports
    the canonical as `/products/<slug>`.
